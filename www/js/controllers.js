@@ -78,8 +78,13 @@ angular.module('starter.controllers', [])
   };
 
   $scope.fetchFbInfo = function(){
-    facebookConnectPlugin.api('/me?fields=first_name,last_name,birthday,albums{name}', ['public_profile', 'email'], function(response) {
-      document.getElementById('status').innerHTML = JSON.stringify(response);
+    facebookConnectPlugin.api('/me/picture?redirect=0&height=200', ['public_profile','email'], function(response) {
+      
+      //document.getElementById('status').innerHTML = JSON.stringify(response);
+     
+     
+      $scope.MyPicURL = response.data.url; 
+      console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ " +  $scope.MyPicURL);
     });
   };
 })

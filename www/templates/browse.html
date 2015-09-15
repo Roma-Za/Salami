@@ -1,5 +1,14 @@
-<ion-view view-title="Browse">
-  <ion-content>
-    <h1>Browse</h1>
-  </ion-content>
+<ion-view view-title="Мои данные">
+  <ion-content padding="true" class="has-header">
+        <h3>Ваши личные данные</h3>
+        <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; width: 100%; height: auto; background-color: rgb(255, 255, 255);">
+           <!--<img ng-src="{{$scope.MyPicURL}}"></img>-->
+           <img src="https://graph.facebook.com/v2.2/me/picture?height=200" />
+        </div>
+        <ion-list>
+            <ion-item>{{$scope.MyPicURL}}</ion-item>
+            <ion-item>Возраст</ion-item>
+            <ion-item>Пол</ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>
