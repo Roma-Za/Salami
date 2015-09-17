@@ -50,6 +50,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+
+   .state('app.alboms', {
+      url: '/alboms',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/alboms.html',
+           controller: 'MyCtrl'
+        }
+      }
+    })
+
     .state('app.playlists', {
       url: '/playlists',
       views: {
