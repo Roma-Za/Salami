@@ -1,1 +1,1 @@
-var DEFAULT_USER_PICTURE = 'img/ava-thumb-big.jpg';
+var DEFAULT_USER_PICTURE = 'img/default_user_picture.png';
