@@ -4,8 +4,10 @@
       <div class="list">
 
         <a ng-repeat="item in albums" 
-           href=""
-           class="item item-thumbnail-left">
+           href="#/app/profile"
+           class="item item-thumbnail-left"
+           ng-click = "{{selectAlbum(item)}}"
+           >
 
           <img ng-src="{{ item.picture.data.url }}">
           <h2>Name: {{ item.name }}</h2>
