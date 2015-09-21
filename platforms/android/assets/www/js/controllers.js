@@ -40,7 +40,8 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 
-  $scope.statusChangeCallback = function(response){
+  $scope.statusChangeCallback = function(response){ 
+    
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -65,14 +66,14 @@ angular.module('starter.controllers', [])
   };
 
   $scope.fbLogin = function() {
-    if (!facebookConnectPlugin || !Utils.checkConnection()) return;
+   
     facebookConnectPlugin.login(['public_profile','email', 'user_birthday', 'user_photos'], function(response) {
-      $scope.statusChangeCallback(response)
+      $scope.statusChangeCallback(response);
     });
   };
 
   $scope.checkLoginState = function(){
-    if (!facebookConnectPlugin || !Utils.checkConnection()) return;
+    if (!facebookConnectPlugin || !Utils.checkConnection($ionicPopup)) return;
     console.log('checkLoginState');
     facebookConnectPlugin.getLoginStatus(function(response) {
       $scope.statusChangeCallback(response);
