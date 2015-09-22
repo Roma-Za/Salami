@@ -1,0 +1,1 @@
+var starter = angular.module('starter', ['ionic']);

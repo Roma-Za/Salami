@@ -1,18 +1,5 @@
 function Utils () {}
 
-Utils.analyticsLogin = function (user) {
-  if (!user) return;
-  var fullName = user.first_name + " " + user.last_name;
-  var created_at = user.created_at * 1000;
-
-  window.Intercom('boot', {
-    app_id: AppSettings.intercomApiKey,
-    name: fullName,
-    email: user.email,
-    created_at: created_at
-  });
-};
-
 Utils.checkConnection = function($ionicPopup){
   if (navigator.connection.type.toUpperCase() === "none".toUpperCase()) {
     $ionicPopup.alert({

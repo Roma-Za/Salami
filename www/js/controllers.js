@@ -1,6 +1,4 @@
-angular.module('starter.controllers', [])
-
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup) {
+starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -107,15 +105,16 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AlbumsCtrl', function($scope) {
+starter.controller('AlbumsCtrl', function($scope) {
   $scope.albums =  JSON.parse(window.localStorage.getItem("albums"));
+
   $scope.selectAlbum = function(selectedAlb){
-  window.localStorage.setItem("selectedAlbum", JSON.stringify(selectedAlb));
-  document.getElementById('currA').innerHTML = selectedAlb.name;
+  window.localStorage.setItem("selectedAlbum", selectedAlb);
+  document.getElementById('currA').innerHTML = JSON.parse(selectedAlb).name;
   }
 })
 
-.controller('PlaylistsCtrl', function($scope) {
+starter.controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
     { title: 'Chill', id: 2 },
@@ -126,5 +125,5 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+starter.controller('PlaylistCtrl', function($scope, $stateParams) {
 });
