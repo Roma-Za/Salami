@@ -5,11 +5,9 @@
 
         <a ng-repeat="item in albums" 
            href="#/app/profile"
-           class="item item-thumbnail-left"
-           ng-click = "{{selectAlbum(item)}}"
+           class="item item-thumbnail-left"           
            >
-
-          <img ng-src="{{ item.picture.data.url }}">
+          <img ng-src="{{ item.picture.data.url }}" ng-click = "{{selectAlbum(item)}}">
           <h2>Name: {{ item.name }}</h2>
           <h4>Number of photos: {{ item.count }}</h4>
           <h4>Description: {{ item.description }}</h4>
