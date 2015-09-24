@@ -87,30 +87,48 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
       $scope.user.email = response.email;
       $scope.user.birthday = response.birthday;
       $scope.user.gender = response.gender;
+      console.log("user____________profile________________ " + JSON.stringify($scope.user));
       $scope.getFbAlbums(); 
+
     });
   };
 
-   $scope.getFbAlbums = function(){
+  $scope.getFbAlbums = function(){
     facebookConnectPlugin.api('me?fields=albums{id,name,count,description,picture{url}}',
           ["public_profile", "user_photos"], function(response) {
       
      window.localStorage.setItem("albums", JSON.stringify(response.albums.data));
 
-      if(window.localStorage.getItem("selectedAlbum") || window.localStorage.getItem("selectedAlbum") !== "")
+      if(window.localStorage.getItem("selectedAlbum") || window.localStorage.getItem("selectedAlbum") !== ""){
         $scope.user.currentAlb = JSON.parse(window.localStorage.getItem("selectedAlbum"));
-
+        window.localStorage.setItem("user", JSON.stringify($scope.user));
+        console.log("user____________alb________________ " + window.localStorage.getItem("user"));
+      }
+        
     });
 
   };
 })
 
 starter.controller('AlbumsCtrl', function($scope) {
+  $scope.getPhotos = function(){
+    var tempUser = JSON.parse(window.localStorage.getItem("user"));
+
+    facebookConnectPlugin.api( ''+$scope.user.currentAlb.id+'/photos?fields=source', 
+      ["public_profile", "user_photos"], function(response) {
+        tempUser.photos = response.data;
+        window.localStorage.removeItem("user");
+        window.localStorage.setItem("user", JSON.stringify(tempUser));
+        console.log("user____________userfoto________________ " + window.localStorage.getItem("user"));
+      });
+  };
+
   $scope.albums =  JSON.parse(window.localStorage.getItem("albums"));
 
   $scope.selectAlbum = function(selectedAlb){
   window.localStorage.setItem("selectedAlbum", selectedAlb);
   document.getElementById('currA').innerHTML = JSON.parse(selectedAlb).name;
+  $scope.getPhotos();
   }
 })
 
