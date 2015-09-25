@@ -13,8 +13,11 @@ function($scope, $ionicPopup) {
     navigator.geolocation.getCurrentPosition(function (pos) {
       
       var tempUser = JSON.parse(window.localStorage.getItem("user"));
-      tempUser.location = pos.coords;
-      document.getElementById('status').innerHTML = JSON.stringify(tempUser.location);
+      var loc ={};
+      loc.latitude = pos.coords.latitude;
+      loc.longitude = pos.coords.longitude;
+      
+      tempUser.location = loc; 
       window.localStorage.removeItem("user");
       window.localStorage.setItem("user", JSON.stringify(tempUser));
       console.log("user____________locale________________ " + window.localStorage.getItem("user"));

@@ -87,7 +87,7 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
       $scope.user.email = response.email;
       $scope.user.birthday = response.birthday;
       $scope.user.gender = response.gender;
-      console.log("user____________profile________________ " + JSON.stringify($scope.user));
+      $scope.user.id = response.id;
       $scope.getFbAlbums(); 
 
     });
@@ -102,7 +102,6 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
       if(window.localStorage.getItem("selectedAlbum") || window.localStorage.getItem("selectedAlbum") !== ""){
         $scope.user.currentAlb = JSON.parse(window.localStorage.getItem("selectedAlbum"));
         window.localStorage.setItem("user", JSON.stringify($scope.user));
-        console.log("user____________alb________________ " + window.localStorage.getItem("user"));
       }
         
     });
@@ -119,7 +118,6 @@ starter.controller('AlbumsCtrl', function($scope) {
         tempUser.photos = response.data;
         window.localStorage.removeItem("user");
         window.localStorage.setItem("user", JSON.stringify(tempUser));
-        console.log("user____________userfoto________________ " + window.localStorage.getItem("user"));
       });
   };
 
