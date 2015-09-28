@@ -1,4 +1,4 @@
-starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http) {
+starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, transformRequestAsFormPost) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -119,8 +119,20 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
     user.profile_picture = $scope.user.avatar;
     //user.location = 
     var struser = JSON.stringify(user);
-    
-     $http.post(API_URL + "salamiusers", struser).
+    console.log(struser);
+    var request = $http({
+                    method: "post",
+                    url: API_URL + "salamiusers",
+                    transformRequest: transformRequestAsFormPost,
+                    data: struser
+                });
+
+     $ionicPopup.alert({
+      title: 'message0',
+      template: JSON.stringify(request)
+    });
+/*
+  $http.post(API_URL + "salamiusers", user).
   then(function(response) {
     // this callback will be called asynchronously
     // when the response is available
@@ -136,7 +148,7 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
       template: JSON.stringify(response)
     });
   });
-
+*/
 /*
 $http.get(API_URL + "salamiusers", {params: { id: 1 }}).success(function(data) {
     alert(JSON.stringify(data));
