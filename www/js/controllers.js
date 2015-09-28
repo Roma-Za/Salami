@@ -1,4 +1,4 @@
-starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup) {
+starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -82,7 +82,8 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
     facebookConnectPlugin.api('me/?fields=picture.height(250).width(250),email,birthday,name,gender',
           ["public_profile", "user_birthday", "email"], function(response) {
       $scope.user = {};
-      $scope.user.avatar = Utils.getUserPicture(response);
+      //$scope.user.avatar = Utils.getUserPicture(response);
+      $scope.user.avatar = response.picture.data.url;
       $scope.user.name = response.name;
       $scope.user.email = response.email;
       $scope.user.birthday = response.birthday;
@@ -105,6 +106,52 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
       }
         
     });
+
+  };
+
+  $scope.createUser = function(){
+    var user = {};
+    user.email = $scope.user.email;
+    user.name = $scope.user.name;
+    user.birthday = $scope.user.birthday;
+    user.gender = $scope.user.gender;
+    user.facebook_id = $scope.user.id;
+    user.profile_picture = $scope.user.avatar;
+    //user.location = 
+    var struser = JSON.stringify(user);
+    
+     $http.post(API_URL + "salamiusers", struser).
+  then(function(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+     $ionicPopup.alert({
+      title: 'message1',
+      template: JSON.stringify(response)
+    });
+  }, function(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+    $ionicPopup.alert({
+      title: 'message2',
+      template: JSON.stringify(response)
+    });
+  });
+
+/*
+$http.get(API_URL + "salamiusers", {params: { id: 1 }}).success(function(data) {
+    alert(JSON.stringify(data));
+});
+*/
+/*
+$http.get(API_URL + "salamiusers/1").success(function(data) {
+    alert(JSON.stringify(data));
+});
+*/
+/*
+$http.get(API_URL + "salamiusers"+ "?id=1").success(function(data) {
+    alert(JSON.stringify(data));
+});
+*/
 
   };
 })
