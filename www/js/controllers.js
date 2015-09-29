@@ -117,21 +117,23 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
     user.gender = $scope.user.gender;
     user.facebook_id = $scope.user.id;
     user.profile_picture = $scope.user.avatar;
-    //user.location = 
+    user.location = 'x3';
     var struser = JSON.stringify(user);
     console.log(struser);
+    /*
     var request = $http({
                     method: "post",
                     url: API_URL + "salamiusers",
                     transformRequest: transformRequestAsFormPost,
-                    data: struser
+                    data: user
                 });
 
      $ionicPopup.alert({
       title: 'message0',
       template: JSON.stringify(request)
     });
-/*
+*/
+
   $http.post(API_URL + "salamiusers", user).
   then(function(response) {
     // this callback will be called asynchronously
@@ -148,7 +150,7 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
       template: JSON.stringify(response)
     });
   });
-*/
+
 /*
 $http.get(API_URL + "salamiusers", {params: { id: 1 }}).success(function(data) {
     alert(JSON.stringify(data));
@@ -156,7 +158,10 @@ $http.get(API_URL + "salamiusers", {params: { id: 1 }}).success(function(data) {
 */
 /*
 $http.get(API_URL + "salamiusers/1").success(function(data) {
-    alert(JSON.stringify(data));
+   $ionicPopup.alert({
+      title: 'message',
+      template: JSON.stringify(data)
+    });
 });
 */
 /*
