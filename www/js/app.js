@@ -24,6 +24,30 @@ starter.run(function($ionicPlatform) {
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+  
+  .state('start', {
+    url: "/start",
+    templateUrl: "templates/start.html",
+    controller: 'LoginCtrl'
+  })
+
+  .state('loginProfile', {
+      url: '/loginProfile',
+      templateUrl: 'templates/loginProfile.html',
+      controller: 'LoginCtrl'
+  })
+
+  .state('loginAlbums', {
+      url: '/loginAlbums',
+      templateUrl: 'templates/loginAlbums.html',
+      controller: 'LoginCtrl'
+  })
+
+  .state('findlocation', {
+    url: "/findlocation",
+    templateUrl: "templates/map.html",
+    controller: 'MapCtrl'
+  })
 
   .state('app', {
     url: '/app',
@@ -43,6 +67,7 @@ starter.run(function($ionicPlatform) {
 
   .state('app.profile', {
       url: '/profile',
+      controller: 'LoginCtrl',
       views: {
         'menuContent': {
           templateUrl: 'templates/profile.html'
@@ -90,5 +115,5 @@ starter.run(function($ionicPlatform) {
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/start');
 });
