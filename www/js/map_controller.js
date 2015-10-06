@@ -52,7 +52,8 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
     user.gender = $scope.tempUser.gender;
     user.facebook_id = $scope.tempUser.id;
     user.profile_picture = $scope.tempUser.avatar;
-    user.collection_type = $scope.tempUser.collection_type.length()>0?$scope.tempUser.collection_type:"collection";
+    user.collection_type = "collection";
+    user.collection_type = $scope.tempUser.collection_type;
     user.location = $scope.tempUser.location;
 
     var struser = JSON.stringify(user);

@@ -141,9 +141,9 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
   ];
 
   $scope.goToMap = function(){
-    var temp = localStorage.get("user");
-    console.log("temp " + temp);
-    if(temp.photos){
+    $scope.temp = localStorage.getObject("user");
+    console.log("temp " + $scope.temp.photos);
+    if($scope.temp.photos){
       $state.go('app.map');     
     }else{
       $ionicPopup.alert({
