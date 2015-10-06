@@ -1,5 +1,5 @@
 <ion-view title="Login Profile">
-    <ion-content class="has-header">
+    <ion-content>
         <div class="wrapper">
             <div class="profile-ava mt-25">
                 <img src="{{user.avatar}}" />
@@ -14,7 +14,10 @@
                 <p><span>Date of birth:</span> {{user.birthday}}</p>
                 <p><span>Gender:</span> {{user.gender}}</p>
                 <p><span>Public album:</span> <span id = "currAlbum"></span></p>
-                <p><span> <button class="button button-block button-positive" ng-click="goToAlbums();">Select the album to be published</button></span></p>
+                <p><span>Type of collection: <div ng-app="app" ng-controller="LoginCtrl">
+                    <dropdown-list data-items-list="itemsList" data-placeholder="type of collection"></dropdown-list></div></span></p>       
+                <button class="button button-block button-positive" ng-click="goToAlbums()">Select the album</button>
+                <button class="button button-block button-positive" ng-click="goToMap()">Your location</button>
             </div>
         </div>
     </ion-content>

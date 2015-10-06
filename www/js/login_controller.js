@@ -1,12 +1,10 @@
 starter.controller('LoginCtrl',
 function($scope, $http, $state, $ionicPopup, localStorage) {
   $scope.user = localStorage.getObject('user');
-  console.log('!!!!!!!!!!!  user ' + JSON.stringify($scope.user));
-
+  $scope.albums =  localStorage.getObject("albums");
   $scope.message = "";
   
   $scope.checkLoginState = function(){
-    console.log('!!!!!!!!!!!  checkLoginState');
     if (!facebookConnectPlugin || !Utils.checkConnection($ionicPopup)) return;
     console.log('checkLoginState');
     facebookConnectPlugin.getLoginStatus(function(response) {
@@ -65,8 +63,6 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
               $scope.user.gender = success.gender;
               $scope.user.id = success.id;
               $scope.getFbAlbums(); 
-              localStorage.setObject('user', $scope.user);
-              $state.go('loginProfile');
             }
           },
           function (error) {
@@ -79,11 +75,9 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
           ["public_profile", "user_photos"], function(response) {
       
       $scope.albums = response.albums.data;
-
-      if(localStorage.get("selectedAlbum") || localStorage.get("selectedAlbum") !== ""){
-        $scope.user.currentAlb = JSON.parse(localStorage.get("selectedAlbum"));
-        localStorage.set("user", JSON.stringify($scope.user));
-      }
+      localStorage.setObject("albums", $scope.albums);
+      $scope.user.currentAlb = localStorage.getObject("selectedAlbum");
+      localStorage.setObject('user', $scope.user);
       $state.go('loginProfile');
     });
   };
@@ -92,20 +86,35 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
     facebookConnectPlugin.api( ''+$scope.user.currentAlb.id+'/photos?fields=source', 
       ["public_profile", "user_photos"], function(response) {
         $scope.user.photos = response.data;
-        localStorage.removeItem("user");
-        localStorage.set("user", JSON.stringify($scope.user));
+        localStorage.setObject("user", $scope.user);
       });
-
+    window.history.back();
   };
 
   $scope.selectAlbum = function(selectedAlb){
-    $scope.user.currentAlb = selectedAlb;
-    localStorage.set("selectedAlbum", selectedAlb);
+    $scope.user.currentAlb = JSON.parse(selectedAlb);
+    localStorage.setObject("selectedAlbum", selectedAlb);
     document.getElementById('currAlbum').innerHTML = JSON.parse(selectedAlb).name;
     $scope.getPhotos();
   };
 
   $scope.goToAlbums = function(){
+    console.log(localStorage.get("user"));
     $state.go('loginAlbums');
+  };
+
+  $scope.itemsList = [
+    {'name': 'stamps'},
+    {'name': 'medals'},
+    {'name': 'coins'},
+    {'name': 'banknotes'},
+    {'name': 'beer caps'},
+    {'name': 'bierdeckels'},
+    {'name': 'flags'},
+    {'name': 'pennants'}
+  ];
+
+  $scope.goToMap = function(){
+    $state.go('app.map');
   };
 });

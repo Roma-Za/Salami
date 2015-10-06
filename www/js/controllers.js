@@ -74,7 +74,7 @@ $http.get(API_URL + "salamiusers"+ "?id=1").success(function(data) {
 
 starter.controller('AlbumsCtrl', function($scope) {
   $scope.getPhotos = function(){
-    var tempUser = JSON.parse(localStorage.get("user"));
+    var tempUser = localStorage.getObject("user");
 
     facebookConnectPlugin.api( ''+$scope.user.currentAlb.id+'/photos?fields=source', 
       ["public_profile", "user_photos"], function(response) {
@@ -84,12 +84,12 @@ starter.controller('AlbumsCtrl', function($scope) {
       });
   };
 
-  $scope.albums =  JSON.parse(localStorage.get("albums"));
+  $scope.albums =  localStorage.getObject("albums");
 
   $scope.selectAlbum = function(selectedAlb){
-  localStorage.set("selectedAlbum", selectedAlb);
-  document.getElementById('currA').innerHTML = JSON.parse(selectedAlb).name;
-  $scope.getPhotos();
+    localStorage.set("selectedAlbum", selectedAlb);
+    document.getElementById('currA').innerHTML = JSON.parse(selectedAlb).name;
+    $scope.getPhotos();
   }
 })
 
