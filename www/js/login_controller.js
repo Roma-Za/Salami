@@ -78,7 +78,33 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
       localStorage.setObject("albums", $scope.albums);
       $scope.user.currentAlb = localStorage.getObject("selectedAlbum");
       localStorage.setObject('user', $scope.user);
-      $state.go('loginProfile');
+
+      $scope.isExist();
+
+      
+    });
+  };
+
+  $scope.isExist = function(){
+    $http.get(API_URL + "salamiusers").success(function(data) {
+     $ionicPopup.alert({
+        title: 'message',
+        template: JSON.stringify(data)
+      });
+     var isIt = false;
+    for (var i = 0; i < data.length; i++) {
+      var idUsr = data[i].facebook_id;
+      console.log("user id = "+idUsr);
+      if(idUsr === $scope.user.id){
+        isIt = true;
+        console.log("true " + idUsr + '=' + $scope.user.id);  
+      }
+    };
+    if(isIt){
+        $state.go('app.playlists');
+      }else{
+        $state.go('loginProfile');
+      }
     });
   };
 
@@ -115,6 +141,16 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
   ];
 
   $scope.goToMap = function(){
-    $state.go('app.map');
+    var temp = localStorage.get("user");
+    console.log("temp " + temp);
+    if(temp.photos){
+      $state.go('app.map');     
+    }else{
+      $ionicPopup.alert({
+        title: 'message',
+        template: "Album not selected!"
+      });
+    }
+    
   };
 });
