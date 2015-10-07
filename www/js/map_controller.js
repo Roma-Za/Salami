@@ -88,18 +88,40 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
     var stralb = JSON.stringify(album);
     console.log("alb---" + stralb);
 
-    $http.post(API_URL + "albums", album).
-  then(function(response) {
-    console.log("response-alb--" + JSON.stringify(response));
-  }, function(response) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-    $ionicPopup.alert({
-      title: 'message2',
-      template: JSON.stringify(response)
-    });
-  });
+    $http.post(API_URL + "albums", album).then(function(response) {
+      console.log("response-alb--" + JSON.stringify(response));
+      console.log("id---" + response.data.album_id);
+      $scope.addPhotos(response.data.album_id);
+      }, function(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+        $ionicPopup.alert({
+          title: 'message2',
+          template: JSON.stringify(response)
+        });
+      });
 
   };
+
+  $scope.addPhotos = function(albumId){
+    var photosArr = $scope.tempUser.photos;
+    for (var i = 0; i < photosArr.length; i++) {
+      var photo = {};
+      photo.picture_url = photosArr[i].source;
+      photo.album_id = albumId;
+      $http.post(API_URL + "photos", photo).
+        then(function(response) {
+          console.log("response-photo--" + JSON.stringify(response));
+        }, function(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          $ionicPopup.alert({
+            title: 'message2',
+            template: JSON.stringify(response)
+          });
+        });
+    }
+  };
+
 
 });
