@@ -35,7 +35,7 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
         title: 'Unable to get location',
         template: 'Please make sure Location Service is switched on'
       });
-    }, { enableHighAccuracy: true, timeout:100000, maximumAge: 3600000 });
+    }, { enableHighAccuracy: true, timeout:10000, maximumAge: 3600000 });
   };
 
   $scope.mapCreated = function(map) {
@@ -52,8 +52,7 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
     user.gender = $scope.tempUser.gender;
     user.facebook_id = $scope.tempUser.id;
     user.profile_picture = $scope.tempUser.avatar;
-    user.collection_type = "collection";
-    user.collection_type = $scope.tempUser.collection_type;
+    user.collection_type = Utils.getUserDate($scope.tempUser, 'collection_type');
     user.location = $scope.tempUser.location;
 
     var struser = JSON.stringify(user);
@@ -63,10 +62,35 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
   then(function(response) {
     // this callback will be called asynchronously
     // when the response is available
-     $ionicPopup.alert({
-      title: 'message1',
+     console.log("response---" + JSON.stringify(response));
+     console.log("id---" + response.data.id);
+     $scope.createAlbum(response.data.id);
+
+  }, function(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+    $ionicPopup.alert({
+      title: 'message2',
       template: JSON.stringify(response)
     });
+  });
+  $state.go('app.playlists');
+  };
+
+  $scope.createAlbum = function(userId){
+    var album = {};
+    album.facebook_album_id = $scope.tempUser.currentAlb.id;
+    album.name = $scope.tempUser.currentAlb.name;
+    album.description = Utils.getUserDate($scope.tempUser, 'description');
+    album.picture_url = Utils.getUserDate($scope.tempUser, 'picture_url');
+    album.user_id = userId;
+
+    var stralb = JSON.stringify(album);
+    console.log("alb---" + stralb);
+
+    $http.post(API_URL + "albums", album).
+  then(function(response) {
+    console.log("response-alb--" + JSON.stringify(response));
   }, function(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
@@ -76,7 +100,6 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
     });
   });
 
-  $state.go('app.playlists');
   };
 
 });

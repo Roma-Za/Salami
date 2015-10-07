@@ -29,3 +29,44 @@ Utils.getUserPicture = function(user) {
     return user.picture.data.url;
   }
 };
+
+Utils.getUserDate = function(user, field) {
+  switch(field){
+    case 'birthday':
+      if (typeof user.birthday !== "string" || user.birthday.length === 0) {
+        return "unknown";
+      } else {
+        return user.birthday;
+      }
+    case 'email':
+      if (typeof user.email !== "string" || user.email.length === 0) {
+        return "unknown";
+      } else {
+        return user.email;
+      }
+    case 'gender':
+      if (typeof user.gender !== "string" || user.gender.length === 0) {
+        return "unknown";
+      } else {
+        return user.gender;
+      }
+    case 'collection_type':
+      if (typeof user.collection_type !== "string" || user.collection_type.length === 0) {
+        return "unknown";
+      } else {
+        return user.collection_type;
+      }
+    case 'description':
+      if (typeof user.currentAlb.description !== "string" || user.currentAlb.description.length === 0) {
+        return "unknown";
+      } else {
+        return user.currentAlb.description;
+      }
+    case 'picture_url':
+      if (typeof user.currentAlb.picture.data.url !== "string" || user.currentAlb.picture.data.url.length === 0) {
+        return DEFAULT_USER_PICTURE;
+      } else {
+        return user.currentAlb.picture.data.url;
+      }
+  }
+};

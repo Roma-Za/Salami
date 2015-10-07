@@ -55,12 +55,11 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
             console.log("success: " + JSON.stringify(success));
             if (success && !success.error) {             
               $scope.user = {};
-              //$scope.user.avatar = Utils.getUserPicture(response);
-              $scope.user.avatar = success.picture.data.url;
+              $scope.user.avatar = Utils.getUserPicture(success);
               $scope.user.name = success.name;
-              $scope.user.email = success.email;
-              $scope.user.birthday = success.birthday;
-              $scope.user.gender = success.gender;
+              $scope.user.email = Utils.getUserDate(success, 'email');
+              $scope.user.birthday = Utils.getUserDate(success, 'birthday');
+              $scope.user.gender = Utils.getUserDate(success, 'gender');
               $scope.user.id = success.id;
               $scope.getFbAlbums(); 
             }
