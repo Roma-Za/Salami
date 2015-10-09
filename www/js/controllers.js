@@ -1,96 +1,43 @@
-starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, transformRequestAsFormPost, localStorage) {
-
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-
-  $scope.createUser = function(){
-    var user = {};
-    user.email = $scope.user.email;
-    user.name = $scope.user.name;
-    user.birthday = $scope.user.birthday;
-    user.gender = $scope.user.gender;
-    user.facebook_id = $scope.user.id;
-    user.profile_picture = $scope.user.avatar;
-    user.location = 'x3';
-    var struser = JSON.stringify(user);
-    console.log(struser);
-    /*
-    var request = $http({
-                    method: "post",
-                    url: API_URL + "salamiusers",
-                    transformRequest: transformRequestAsFormPost,
-                    data: user
-                });
-
-     $ionicPopup.alert({
-      title: 'message0',
-      template: JSON.stringify(request)
+starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage) {
+    var myUser = localStorage.getObject('user');
+    console.log("myUser_id", JSON.stringify(myUser.id));
+    $http.get(API_URL + "salamiusers/search?facebook_id=" + myUser.id).then(function(data) {
+      console.log("__data__", JSON.stringify(data));
+      $scope.user = data.data[0];
+      $scope.getFbAlbums();
+    }, function(err) {
+      console.log("__err__", JSON.stringify(err));
     });
-*/
 
-  $http.post(API_URL + "salamiusers", user).
-  then(function(response) {
-    // this callback will be called asynchronously
-    // when the response is available
-     $ionicPopup.alert({
-      title: 'message1',
-      template: JSON.stringify(response)
-    });
-  }, function(response) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-    $ionicPopup.alert({
-      title: 'message2',
-      template: JSON.stringify(response)
-    });
-  });
-
-/*
-$http.get(API_URL + "salamiusers", {params: { id: 1 }}).success(function(data) {
-    alert(JSON.stringify(data));
-});
-*/
-/*
-$http.get(API_URL + "salamiusers/1").success(function(data) {
-   $ionicPopup.alert({
-      title: 'message',
-      template: JSON.stringify(data)
-    });
-});
-*/
-/*
-$http.get(API_URL + "salamiusers"+ "?id=1").success(function(data) {
-    alert(JSON.stringify(data));
-});
-*/
-
-  };
+    $scope.getFbAlbums = function(){
+        facebookConnectPlugin.api('me?fields=albums{id,name,count,description,picture{url}}',
+              ["public_profile", "user_photos"], function(response) {
+          
+          localStorage.setObject("albums", response.albums.data);
+        });
+      };
 })
 
-starter.controller('AlbumsCtrl', function($scope) {
-  $scope.getPhotos = function(){
-    var tempUser = localStorage.getObject("user");
+starter.controller('AlbumsCtrl', function($scope, $http, localStorage) {
 
-    facebookConnectPlugin.api( ''+$scope.user.currentAlb.id+'/photos?fields=source', 
+  $scope.getPhotos = function(album){
+    var photos = {};
+    facebookConnectPlugin.api( '' + album.id + '/photos?fields=source', 
       ["public_profile", "user_photos"], function(response) {
-        tempUser.photos = response.data;
-        localStorage.removeItem("user");
-        localStorage.set("user", JSON.stringify(tempUser));
+        photos = response.data;
+        console.log('photos', JSON.stringify(photos));
       });
+   window.history.back();
   };
 
   $scope.albums = localStorage.getObject("albums");
 
   $scope.selectAlbum = function(selectedAlb){
-    localStorage.set("selectedAlbum", selectedAlb);
+    console.log('album_ ', JSON.parse(selectedAlb));
     document.getElementById('currA').innerHTML = JSON.parse(selectedAlb).name;
-    $scope.getPhotos();
+    $scope.getPhotos(JSON.parse(selectedAlb));
   }
+
 })
 
 starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory) {

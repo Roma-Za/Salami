@@ -2,7 +2,7 @@
     <ion-content class="has-header">
         <div class="wrapper">
             <div class="profile-ava mt-25">
-                <img src="{{user.avatar}}" />
+                <img src="{{user.profile_picture}}" />
             </div>
             <div class="profile-name">
                 <div class="mt-10 mb-20">
@@ -13,7 +13,9 @@
                 <p><span>Email:</span> {{user.email}}</p>
                 <p><span>Date of birth:</span> {{user.birthday}}</p>
                 <p><span>Gender:</span> {{user.gender}}</p>
-                <p><span>Public album:</span> <span id = "currA"></span></p>
+                <p><span>Type of collection:</span> {{user.collection_type}}</p>
+                <p><span>Public album:</span> <span id = "currA">{{user.albums[0].name}}</span></p>
+
                 <p><span><a href="#/app/albums">Select the album to be published</a></span></p>
             </div>
         </div>

@@ -73,7 +73,7 @@ starter.run(function($ionicPlatform) {
 
   .state('app.profile', {
       url: '/profile',
-      controller: 'LoginCtrl',
+      controller: 'AppCtrl',
       views: {
         'menuContent': {
           templateUrl: 'templates/profile.html'
