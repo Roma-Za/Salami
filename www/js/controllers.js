@@ -84,7 +84,7 @@ starter.controller('AlbumsCtrl', function($scope) {
       });
   };
 
-  $scope.albums =  localStorage.getObject("albums");
+  $scope.albums = localStorage.getObject("albums");
 
   $scope.selectAlbum = function(selectedAlb){
     localStorage.set("selectedAlbum", selectedAlb);
@@ -93,15 +93,16 @@ starter.controller('AlbumsCtrl', function($scope) {
   }
 })
 
-starter.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory) {
+
+  $ionicHistory.clearHistory();
+
+  $http.get(API_URL + "salamiusers/search").then(function(data) {
+    console.log('Success        list       ', JSON.stringify(data.data));
+    $scope.playlists = data.data;
+  }, function(err) {
+    console.error('ERR     list      ', err);
+  });
 })
 
 starter.controller('PlaylistCtrl', function($scope, $stateParams) {

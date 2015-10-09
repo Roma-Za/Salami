@@ -85,25 +85,18 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
   };
 
   $scope.isExist = function(){
-    $http.get(API_URL + "salamiusers").success(function(data) {
-     $ionicPopup.alert({
-        title: 'message',
-        template: JSON.stringify(data)
-      });
-     var isIt = false;
-    for (var i = 0; i < data.length; i++) {
-      var idUsr = data[i].facebook_id;
-      console.log("user id = "+idUsr);
-      if(idUsr === $scope.user.id){
-        isIt = true;
-        console.log("true " + idUsr + '=' + $scope.user.id);  
-      }
-    };
-    if(isIt){
+    $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.user.id).then(function(data) {
+      console.log('isExist data   ', JSON.stringify(data));
+      if(data.data.length>0){
+        console.log('IIIIIIIIIIIIIIIIIIIIIIIIDDDDDDDDDDDDDDDDDDD', data.data[0].id);
+        localStorage.set('myId', data.data[0].id);
         $state.go('app.playlists');
       }else{
         $state.go('loginProfile');
       }
+    }, function(err) {
+      console.error('ERR', err);
+      $state.go('loginProfile');
     });
   };
 
@@ -143,7 +136,7 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
     $scope.temp = localStorage.getObject("user");
     console.log("temp " + $scope.temp.photos);
     if($scope.temp.photos){
-      $state.go('app.map');     
+      $state.go('loginMap');     
     }else{
       $ionicPopup.alert({
         title: 'message',
