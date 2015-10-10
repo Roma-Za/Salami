@@ -1,5 +1,5 @@
 starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage) {
-
+    localStorage.setObject("selectedAlbum", '{}');
     var myUser = localStorage.getObject('user');
     console.log("myUser_id", JSON.stringify(myUser.id));
 
@@ -24,7 +24,7 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
       facebookConnectPlugin.api('me/?fields=picture.height(250).width(250),email,birthday,name,gender',
         ["public_profile", "user_birthday", "email"], 
         function (success) {
-          console.log("success: " + JSON.stringify(success));
+          console.log("success__1: " + JSON.stringify(success));
           if (success && !success.error) {             
             $scope.new_user = {};
             $scope.new_user.avatar = Utils.getUserPicture(success);
@@ -38,9 +38,11 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
           function (error) {
             console.log("FB get /me error: " + JSON.stringify(error));
         });
-
-      $scope.album = localStorage.getObject("selectedAlbum");
-
+      if(localStorage.getObject("selectedAlbum")!='{}'){
+        $scope.album = localStorage.getObject("selectedAlbum");
+      }else{
+        $scope.album = $scope.user.albums[0].name;
+      }
       $scope.getPhotos();
 
       $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.new_user.id).then(function(data) {
@@ -64,7 +66,7 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
           userTemp.profile_picture = $scope.new_user.avatar;
         }
 
-        if(obj.property){
+        if(userTemp.property){
           $scope.updateUser("salamiusers/" + data.data[0].id, userTemp);
         }
         /*
