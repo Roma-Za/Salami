@@ -133,14 +133,18 @@ starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $stat
 })
 
 starter.controller('PhotosCtrl', function($scope, $state, $http, localStorage) {
-  console.log('album_id___in localStorage___photos '+ localStorage.get('albId'));
-  var albumId = localStorage.get('albId');
-   $http.get(API_URL + "photos/search?album_id=" + albumId).then(function(data) {
+  
+  $scope.$on('$ionicView.enter', function(){
+    console.log('album_id___in localStorage___photos '+ localStorage.get('albId'));
+    var albumId = localStorage.get('albId');
+    $http.get(API_URL + "photos/search?album_id=" + albumId).then(function(data) {
       console.log("__photos__", JSON.stringify(data.data));
       $scope.photos = data.data;
     }, function(err) {
       console.log("__err__", JSON.stringify(err));
     });
+  });
+   
 
 })
 
