@@ -5,7 +5,7 @@
                 <img src="{{user.profile_picture}}" />
             </div>
             <div class="profile-name">
-                <div class="mt-10 mb-20">
+                <div class="mt-5 mb-20">
                     <h2>{{user.name}}</h2>
                 </div>
             </div>
@@ -16,7 +16,8 @@
                 <p><span>Type of collection:</span> {{user.collection_type}}</p>
                 <p><span>Public album:</span> <span id = "currA">{{user.albums[0].name}}</span></p>
 
-                <p><span><a href="#/app/albums">Select the album to be published</a></span></p>
+                <p><span class="mt-5 mb-20"><a href="#/app/albums">Select the album to be published</a></span></p>
+                <button class="button button-block button-positive mt-5 mb-5" ng-click="updateMyData()">Update on a server</button>
             </div>
         </div>
     </ion-content>

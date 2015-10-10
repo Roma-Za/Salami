@@ -55,6 +55,12 @@ map {
 .mr-10 {
     margin-right: 10px;
 }
+.ml-10 {
+    margin-left: 10px;
+}
+.mt-5 {
+    margin-top: 5px;
+}
 .mt-10 {
     margin-top: 10px;
 }
@@ -63,6 +69,9 @@ map {
 }
 .mt-25 {
     margin-top: 25px;
+}
+.mb-5 {
+    margin-bottom: 5px;
 }
 .mb-10 {
     margin-bottom: 10px;

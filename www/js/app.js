@@ -49,6 +49,12 @@ starter.run(function($ionicPlatform) {
     controller: 'MapCtrl'
   })
 
+  .state('photos', {
+    url: "/photos",
+    templateUrl: "templates/photos.html",
+    controller: 'PhotosCtrl'
+  })
+
   .state('loginMap', {
     url: "/loginMap",
     templateUrl: "templates/loginMap.html",

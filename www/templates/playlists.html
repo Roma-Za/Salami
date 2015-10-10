@@ -1,8 +1,41 @@
-<ion-view view-title="Playlists">
+<ion-view view-title="Userlists">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="">
-        {{playlist.name}}{{playlist.albums[0].name}}
+      <ion-item ng-repeat="playlist in playlists" ng-click = "showPhotos('{{ playlist }}')">
+
+      	<div class="list card">
+
+		  <div class="item item-avatar">
+		    <img src="{{playlist.profile_picture}}">
+		    <h2>{{playlist.name}}</h2>
+		    <p>Birthday: {{playlist.birthday}}</p>
+		    <p>Gender: {{playlist.gender}}</p>
+		  </div>
+
+		  <div class="item item-body">
+		    <img class="full-image" src="{{playlist.albums[0].picture_url}}">
+		    <p>Album name: {{playlist.albums[0].name}}</p>
+		    <p>Collection type: {{playlist.collection_type}}</p>
+		    <p>Description: {{playlist.albums[0].description}}</p>
+		  </div>
+
+		  <div class="item tabs tabs-secondary tabs-icon-left">
+		    <a class="tab-item" href="#">
+		      <i class="icon ion-thumbsup"></i>
+		      Like
+		    </a>
+		    <a class="tab-item" href="#">
+		      <i class="icon ion-chatbox"></i>
+		      Message
+		    </a>
+		    <a class="tab-item" href="#">
+		      <i class="icon ion-thumbsdown"></i>
+		      Dislike
+		    </a>
+		  </div>
+
+		</div>
+      
       </ion-item>
     </ion-list>
   </ion-content>
