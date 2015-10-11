@@ -2,17 +2,17 @@
     <ion-content class="has-header">
         <div class="wrapper">
             <div class="profile-ava mt-25">
-                <img src="{{user.profile_picture}}" />
+                <img src="{{myUser.avatar}}" />
             </div>
             <div class="profile-name">
                 <div class="mt-5 mb-20">
-                    <h2>{{user.name}}</h2>
+                    <h2>{{myUser.name}}</h2>
                 </div>
             </div>
             <div class="white-box profile-data">
-                <p><span>Email:</span> {{user.email}}</p>
-                <p><span>Date of birth:</span> {{user.birthday}}</p>
-                <p><span>Gender:</span> {{user.gender}}</p>
+                <p><span>Email:</span> {{myUser.email}}</p>
+                <p><span>Date of birth:</span> {{myUser.birthday}}</p>
+                <p><span>Gender:</span> {{myUser.gender}}</p>
                 <p><span>Type of collection:</span> {{user.collection_type}}</p>
                 <p><span>Public album:</span> <span id = "currA">{{user.albums[0].name}}</span></p>
 

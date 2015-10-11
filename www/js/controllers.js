@@ -1,6 +1,7 @@
 starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage) {
     localStorage.setObject("selectedAlbum", '{}');
     var myUser = localStorage.getObject('user');
+    $scope.myUser = myUser;
     console.log("myUser_id", JSON.stringify(myUser.id));
 
     $http.get(API_URL + "salamiusers/search?facebook_id=" + myUser.id).then(function(data) {
@@ -38,11 +39,15 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
           function (error) {
             console.log("FB get /me error: " + JSON.stringify(error));
         });
+      $scope.album = {};
       if(localStorage.getObject("selectedAlbum")!='{}'){
-        $scope.album = localStorage.getObject("selectedAlbum");
+        $scope.album = JSON.parse(localStorage.getObject("selectedAlbum"));
+        console.log("album 1111111 "+ JSON.stringify($scope.album));
       }else{
-        $scope.album = $scope.user.albums[0].name;
+        $scope.album = $scope.user.albums[0];
+        console.log("album 222222 "+ JSON.stringify($scope.album));
       }
+      console.log("album 333333333 "+ JSON.stringify($scope.album));
       $scope.getPhotos();
 
       $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.new_user.id).then(function(data) {
@@ -66,18 +71,73 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
           userTemp.profile_picture = $scope.new_user.avatar;
         }
 
-        if(userTemp.property){
+        if(JSON.stringify(userTemp) != '{}'){
           $scope.updateUser("salamiusers/" + data.data[0].id, userTemp);
         }
-        /*
+        
         if(data.data[0].albums[0].facebook_album_id !== $scope.album.id){
-          data.data[0].albums[0].album_id
+          $http.delete(API_URL + "albums/" + data.data[0].albums[0].album_id, { ignoreAuthModule: true })
+            .finally(function(data) {
+              
+            });
+          $scope.createAlbum(data.data[0].id);
         }
-        */
+        
+        
       }, function(err) {
         console.error('ERR', err);
       });
     } 
+
+    $scope.createAlbum = function(userId){
+      var user = {};
+      user.currentAlb = $scope.album;
+      console.log("description" + JSON.stringify(user.currentAlb.description));
+    var alb = {};
+    alb.facebook_album_id = user.currentAlb.id;
+    alb.name = user.currentAlb.name;
+    alb.description = Utils.getUserDate(user, 'description');
+    alb.picture_url = Utils.getUserDate(user, 'picture_url');
+    alb.user_id = userId;
+
+    var stralb = JSON.stringify(alb);
+    console.log("alb---" + stralb);
+
+    $http.post(API_URL + "albums", alb).then(function(response) {
+      console.log("response-alb--" + JSON.stringify(response));
+      console.log("id---" + response.data.album_id);
+      $scope.addPhotos(response.data.album_id);
+      }, function(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+        $ionicPopup.alert({
+          title: 'message2',
+          template: JSON.stringify(response)
+        });
+      });
+
+  };
+
+  $scope.addPhotos = function(albumId){
+    var photosArr = $scope.photos;
+    for (var i = 0; i < photosArr.length; i++) {
+      var photo = {};
+      photo.picture_url = photosArr[i].source;
+      photo.album_id = albumId;
+      $http.post(API_URL + "photos", photo).
+        then(function(response) {
+          console.log("response-photo--" + JSON.stringify(response));
+        }, function(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          $ionicPopup.alert({
+            title: 'message2',
+            template: JSON.stringify(response)
+          });
+        });
+    }
+  };
+
 
     $scope.updateUser = function(strPath, new_data){
       
