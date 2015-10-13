@@ -1,98 +1,97 @@
 starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage) {
-    localStorage.setObject("selectedAlbum", '{}');
-    var myUser = localStorage.getObject('user');
-    $scope.myUser = myUser;
-    console.log("myUser_id", JSON.stringify(myUser.id));
+  localStorage.setObject("selectedAlbum", '{}');
 
-    $http.get(API_URL + "salamiusers/search?facebook_id=" + myUser.id).then(function(data) {
+  $scope.fbUser = localStorage.getObject('user');
+  console.log("fbUser--- ", JSON.stringify($scope.fbUser));
+  
+  //Объявление функций
+  $scope.getSalamiUser = function(){
+    $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.fbUser.id).then(function(data) {
       console.log("__data__", JSON.stringify(data));
-      $scope.user = data.data[0];
-      $scope.getFbAlbums();
+      $scope.salami_user = data.data[0];     
     }, function(err) {
       console.log("__err__", JSON.stringify(err));
     });
+  }
 
-    $scope.getFbAlbums = function(){
-        facebookConnectPlugin.api('me?fields=albums{id,name,count,description,picture{url}}',
-              ["public_profile", "user_photos"], function(response) {
-          
-          localStorage.setObject("albums", response.albums.data);
-        });
-    };
+  $scope.getSalamiUserByMod = function(){
+    $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.fbUser.id).then(function(data) {
+      console.log("__data__", JSON.stringify(data));
+      $scope.salami_user = data.data[0];
+      $scope.salamiUserModification();  
 
-    $scope.updateMyData = function(){
-
-      facebookConnectPlugin.api('me/?fields=picture.height(250).width(250),email,birthday,name,gender',
-        ["public_profile", "user_birthday", "email"], 
-        function (success) {
-          console.log("success__1: " + JSON.stringify(success));
-          if (success && !success.error) {             
-            $scope.new_user = {};
-            $scope.new_user.avatar = Utils.getUserPicture(success);
-            $scope.new_user.name = success.name;
-            $scope.new_user.email = Utils.getUserDate(success, 'email');
-            $scope.new_user.birthday = Utils.getUserDate(success, 'birthday');
-            $scope.new_user.gender = Utils.getUserDate(success, 'gender');
-            $scope.new_user.id = success.id;
-          }
-          },
-          function (error) {
-            console.log("FB get /me error: " + JSON.stringify(error));
-        });
       $scope.album = {};
       if(localStorage.getObject("selectedAlbum")!='{}'){
         $scope.album = JSON.parse(localStorage.getObject("selectedAlbum"));
         console.log("album 1111111 "+ JSON.stringify($scope.album));
       }else{
-        $scope.album = $scope.user.albums[0];
+        $scope.album = $scope.salami_user.albums[0];
         console.log("album 222222 "+ JSON.stringify($scope.album));
       }
       console.log("album 333333333 "+ JSON.stringify($scope.album));
-      $scope.getPhotos();
 
-      $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.new_user.id).then(function(data) {
-        console.log('isExist data   ', JSON.stringify(data));
-        console.log('server_user.name', data.data[0].name);
-        console.log('new_user.name', $scope.new_user.name);
-        var userTemp = {};
-        if(data.data[0].name !== $scope.new_user.name){
-          userTemp.name = $scope.new_user.name;
-        }
-        if(data.data[0].email !== $scope.new_user.email){
-          userTemp.email = $scope.new_user.email;
-        }
-        if(data.data[0].birthday !== $scope.new_user.birthday){
-          userTemp.birthday = $scope.new_user.birthday;
-        }
-        if(data.data[0].gender !== $scope.new_user.gender){
-          userTemp.gender = $scope.new_user.gender;
-        }
-        if(data.data[0].profile_picture !== $scope.new_user.avatar){
-          userTemp.profile_picture = $scope.new_user.avatar;
-        }
-
-        if(JSON.stringify(userTemp) != '{}'){
-          $scope.updateUser("salamiusers/" + data.data[0].id, userTemp);
-        }
+      if($scope.salami_user.albums[0].facebook_album_id !== $scope.album.id){
+        $scope.salamiAlbumMod();
+      }
         
-        if(data.data[0].albums[0].facebook_album_id !== $scope.album.id){
-          $http.delete(API_URL + "albums/" + data.data[0].albums[0].album_id, { ignoreAuthModule: true })
+    }, function(err) {
+      console.log("__err__", JSON.stringify(err));
+    });
+  }
+
+  $scope.getFbAlbums = function(){
+        facebookConnectPlugin.api('me?fields=albums{id,name,count,description,picture{url}}',
+              ["public_profile", "user_photos"], function(response) {
+          
+          localStorage.setObject("fbAlbums", response.albums.data);
+        });
+    };
+
+  $scope.salamiUserModification = function(){
+    var userTemp = {};
+    if($scope.salami_user.name !== $scope.fbUser.name){
+      userTemp.name = $scope.fbUser.name;
+    }
+    if($scope.salami_user.email !== $scope.fbUser.email){
+      userTemp.email = $scope.fbUser.email;
+    }
+    if($scope.salami_user.birthday !== $scope.fbUser.birthday){
+      userTemp.birthday = $scope.fbUser.birthday;
+    }
+    if($scope.salami_user.gender !== $scope.fbUser.gender){
+      userTemp.gender = $scope.fbUser.gender;
+    }
+    if($scope.salami_user.profile_picture !== $scope.fbUser.avatar){
+      userTemp.profile_picture = $scope.fbUser.avatar;
+    }
+
+    if(JSON.stringify(userTemp) != '{}'){
+      $scope.updateUser("salamiusers/" + $scope.salami_user.id, userTemp);
+    }
+  }
+
+  $scope.updateUser = function(strPath, new_data){  
+    $http({method:'PUT', url: API_URL + strPath, data: new_data})
+    .then(function(resp){
+      console.log("PUTresponse---" + JSON.stringify(resp));
+    }), 
+    function(err){
+      console.log("PUTerr---" + JSON.stringify(err));
+    }
+  };
+
+  $scope.salamiAlbumMod = function(){
+    $http.delete(API_URL + "albums/" + $scope.salami_user.albums[0].album_id, { ignoreAuthModule: true })
             .finally(function(data) {
-              
-            });
-          $scope.createAlbum(data.data[0].id);
-        }
-        
-        
-      }, function(err) {
-        console.error('ERR', err);
-      });
-    } 
+              console.log('delete finally ' + data);
+              $scope.createAlbum($scope.salami_user.id);
+            });         
+  }
 
-    $scope.createAlbum = function(userId){
-      var user = {};
-      user.currentAlb = $scope.album;
-      console.log("description" + JSON.stringify(user.currentAlb.description));
+  $scope.createAlbum = function(userId){
+    var user = {};
+    user.currentAlb = $scope.album;
+    console.log("description" + JSON.stringify(user.currentAlb.description));
     var alb = {};
     alb.facebook_album_id = user.currentAlb.id;
     alb.name = user.currentAlb.name;
@@ -106,16 +105,20 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
     $http.post(API_URL + "albums", alb).then(function(response) {
       console.log("response-alb--" + JSON.stringify(response));
       console.log("id---" + response.data.album_id);
-      $scope.addPhotos(response.data.album_id);
+      $scope.getPhotos(response.data.album_id);
+      
       }, function(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-        $ionicPopup.alert({
-          title: 'message2',
-          template: JSON.stringify(response)
-        });
+        console.log("err-" + response);
       });
+  };
 
+  $scope.getPhotos = function(salami_album_id){
+    facebookConnectPlugin.api( '' + $scope.album.id + '/photos?fields=source', 
+      ["public_profile", "user_photos"], function(response) {
+        $scope.photos = response.data;
+        console.log('photos', JSON.stringify($scope.photos));
+        $scope.addPhotos(salami_album_id);
+      });
   };
 
   $scope.addPhotos = function(albumId){
@@ -128,40 +131,23 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
         then(function(response) {
           console.log("response-photo--" + JSON.stringify(response));
         }, function(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-          $ionicPopup.alert({
-            title: 'message2',
-            template: JSON.stringify(response)
-          });
+           console.log("err--" + JSON.stringify(response));
         });
     }
   };
 
+  //вызов
+  $scope.getSalamiUser();
+  $scope.getFbAlbums();
 
-    $scope.updateUser = function(strPath, new_data){
-      
-      $http({method:'PUT', url: API_URL + strPath, data: new_data})
-        .then(function(resp){
-          console.log("PUTresponse---" + JSON.stringify(resp));
-        },
-          function(err){
-            console.log("PUTerr---" + JSON.stringify(err));
-          })
-    };
-
-    $scope.getPhotos = function(){
-      facebookConnectPlugin.api( '' + $scope.album.id + '/photos?fields=source', 
-        ["public_profile", "user_photos"], function(response) {
-          $scope.photos = response.data;
-          console.log('photos', JSON.stringify(photos));
-        });
-    };
+  $scope.updateMyData = function(){
+    $scope.getSalamiUserByMod();
+  }
 })
 
 starter.controller('AlbumsCtrl', function($scope, $http, localStorage) {
 
-  $scope.albums = localStorage.getObject("albums");
+  $scope.albums = localStorage.getObject("fbAlbums");
 
   $scope.selectAlbum = function(selectedAlb){
     console.log('album_ ', JSON.parse(selectedAlb));
@@ -178,7 +164,7 @@ starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $stat
 
   $http.get(API_URL + "salamiusers/search").then(function(data) {
     console.log('Success        list       ', JSON.stringify(data.data));
-    $scope.playlists = data.data;
+    $scope.userlists = data.data;
   }, function(err) {
     console.error('ERR     list      ', err);
   });
@@ -190,6 +176,26 @@ starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $stat
     console.log('album_id___in localStorage '+ localStorage.get('albId'));
     $state.go('photos');
   }
+
+  $scope.doDislike = function(item){
+    console.log('doDislike  item '+ JSON.stringify(item));
+    var objLike = {};
+    objLike.type = "dislike";
+    objLike.user1_id = localStorage.get('myId');
+    objLike.user2_id = JSON.parse(item).id;
+
+    $http.post(API_URL + "likes", objLike).then(function(response) {
+      console.log("response-dislike--" + JSON.stringify(response));
+      }, function(response) {
+        console.log("err-" + response);
+      });
+    
+  }
+
+  $scope.doLike = function(item){
+    console.log('doLike  item '+ JSON.stringify(item));
+  }
+
 })
 
 starter.controller('PhotosCtrl', function($scope, $state, $http, localStorage) {
