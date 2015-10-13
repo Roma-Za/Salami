@@ -1,4 +1,4 @@
-starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage) {
+starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage, $state) {
   localStorage.setObject("selectedAlbum", '{}');
 
   $scope.fbUser = localStorage.getObject('user');
@@ -143,6 +143,15 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
   $scope.updateMyData = function(){
     $scope.getSalamiUserByMod();
   }
+
+  $scope.deleteMyData = function(){
+
+    $http.delete(API_URL + "salamiusers/" + $scope.salami_user.id, { ignoreAuthModule: true })
+      .success(function (data) {
+        console.log('delete finally ' + data);
+        $state.go('start');
+    });
+  }
 })
 
 starter.controller('AlbumsCtrl', function($scope, $http, localStorage) {
@@ -183,17 +192,47 @@ starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $stat
     objLike.type = "dislike";
     objLike.user1_id = localStorage.get('myId');
     objLike.user2_id = JSON.parse(item).id;
-
-    $http.post(API_URL + "likes", objLike).then(function(response) {
-      console.log("response-dislike--" + JSON.stringify(response));
-      }, function(response) {
-        console.log("err-" + response);
-      });
+    if(objLike.user1_id!==objLike.user2_id){
+      $scope.likesUpdate(objLike);
+    }
     
   }
 
   $scope.doLike = function(item){
     console.log('doLike  item '+ JSON.stringify(item));
+    var objLike = {};
+    objLike.type = "like";
+    objLike.user1_id = localStorage.get('myId');
+    objLike.user2_id = JSON.parse(item).id;
+    if(objLike.user1_id!==objLike.user2_id){
+      $scope.likesUpdate(objLike);
+    }
+  }
+
+  $scope.likesUpdate =function(obj){
+    $http.get(API_URL + "likes/search?user1_id=" + obj.user1_id + "&user2_id=" + obj.user2_id).then(function(data) {
+      console.log("__data__", JSON.stringify(data));
+      if(data.data[0].type!==obj.type){
+        var new_data = {};
+        new_data.type = obj.type;
+        $http({method:'PUT', url: API_URL + "likes/" + data.data[0].id, data: new_data})
+        .then(function(resp){
+          console.log("PUTresponse---" + JSON.stringify(resp));
+        }), 
+        function(err){
+          console.log("PUTerr---" + JSON.stringify(err));
+        }
+      }
+    }, function(err) {
+      console.log("__err__", JSON.stringify(err));
+
+      $http.post(API_URL + "likes", obj).then(function(response) {
+        console.log("response-dislike--" + JSON.stringify(response));
+      }, function(response) {
+        console.log("err-" + JSON.stringify(response));
+      });
+    });
+
   }
 
 })

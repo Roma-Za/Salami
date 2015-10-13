@@ -1,5 +1,5 @@
 starter.controller('LoginCtrl',
-function($scope, $http, $state, $ionicPopup, localStorage) {
+function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
   $scope.user = localStorage.getObject('user');
   $scope.albums =  localStorage.getObject("albums");
   $scope.message = "";
@@ -145,4 +145,19 @@ function($scope, $http, $state, $ionicPopup, localStorage) {
     }
     
   };
+
+  $scope.logout = function(){
+    facebookConnectPlugin.logout(function(response) {
+      $ionicHistory.clearCache();
+      $ionicHistory.clearHistory();
+      $ionicPopup.alert({
+        title: 'message',
+        template: "Log out done."
+      });
+    });
+  }
+
+//  console.log("history backView "+JSON.stringify($ionicHistory.backView()));
+
+
 });
