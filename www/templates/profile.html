@@ -13,9 +13,10 @@
                 <p><span>Email:</span> {{fbUser.email}}</p>
                 <p><span>Date of birth:</span> {{fbUser.birthday}}</p>
                 <p><span>Gender:</span> {{fbUser.gender}}</p>
-                <p><span>Type of collection:</span> {{salami_user.collection_type}}</p>
+                <p><span>Type of collection:</span><span id = "colType">{{salami_user.collection_type}}</span></p>
                 <p><span>Public album:</span> <span id = "currA">{{salami_user.albums[0].name}}</span></p>
-
+                <div ng-app="app" ng-controller="AppCtrl">
+                    <dropdown-list data-items-list="itemsList" data-placeholder="type of collection"></dropdown-list></div> 
                 <p><span class="mt-5 mb-20"><a href="#/app/albums">Select the album to be published</a></span></p>
                 <button class="button button-block button-positive mt-5 mb-5" ng-click="updateMyData()">Update on a server</button>
                 <button class="button button-block button-positive mt-5 mb-5" ng-click="deleteMyData()">Delete salami profile</button>

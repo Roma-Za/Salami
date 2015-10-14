@@ -38,8 +38,8 @@ starter.directive('map', function() {
       itemsList: '=',
       placeholder: '@'
     },
-    template: '<input type="text" ng-model="search" placeholder="{{ placeholder }}" />' +
-        '<div class="search-item-list"><ul class="list">' +
+    template: '<input type="text" ng-model="search" ng-change="customValue()" placeholder="{{ placeholder }}" />' +
+        '<div class="search-item-list"><ul class="dropdownlist">' +
         '<li ng-repeat="item in itemsList | filter:search" ng-click="chooseItem( item )">{{ item.name }}' + '</li>' + '</ul></div>',
     link: function($scope, el, attr){
         var $listContainer = angular.element( el[0].querySelectorAll('.search-item-list')[0] );
@@ -54,14 +54,15 @@ starter.directive('map', function() {
           $timeout(function(){ $listContainer.removeClass('show') }, 200);
         });
       
-        $scope.chooseItem = function( item){
-          $scope.search = item.name;
-          $scope.user = localStorage.getObject("user");
-          $scope.user.collection_type = item.name;
-          localStorage.setObject('user', $scope.user);
-          $listContainer.removeClass('show');
-          console.log(localStorage.get("user"));
-       }
+       $scope.chooseItem = function( item){
+        $scope.search = item.name;
+        localStorage.setObject('collection_type', $scope.search);
+        $listContainer.removeClass('show');
+       };
+       $scope.customValue = function() {
+        localStorage.setObject('collection_type', $scope.search);
+       };
     }
   }
 });
+     

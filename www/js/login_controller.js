@@ -3,7 +3,8 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
   $scope.user = localStorage.getObject('user');
   $scope.albums =  localStorage.getObject("albums");
   $scope.message = "";
-  
+  $ionicHistory.clearHistory();
+
   $scope.checkLoginState = function(){
     if (!facebookConnectPlugin || !Utils.checkConnection($ionicPopup)) return;
     console.log('checkLoginState');
@@ -104,6 +105,7 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
     facebookConnectPlugin.api( ''+$scope.user.currentAlb.id+'/photos?fields=source', 
       ["public_profile", "user_photos"], function(response) {
         $scope.user.photos = response.data;
+        $scope.user.collection_type = localStorage.getObject('collection_type');
         localStorage.setObject("user", $scope.user);
       });
     window.history.back();
@@ -121,16 +123,7 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
     $state.go('loginAlbums');
   };
 
-  $scope.itemsList = [
-    {'name': 'stamps'},
-    {'name': 'medals'},
-    {'name': 'coins'},
-    {'name': 'banknotes'},
-    {'name': 'beer caps'},
-    {'name': 'bierdeckels'},
-    {'name': 'flags'},
-    {'name': 'pennants'}
-  ];
+  $scope.itemsList = ITEMSLIST;
 
   $scope.goToMap = function(){
     $scope.temp = localStorage.getObject("user");
@@ -156,8 +149,6 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
       });
     });
   }
-
-//  console.log("history backView "+JSON.stringify($ionicHistory.backView()));
 
 
 });

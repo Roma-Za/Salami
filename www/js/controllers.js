@@ -1,9 +1,11 @@
-starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage, $state) {
+starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage, $state, $ionicLoading) {
   localStorage.setObject("selectedAlbum", '{}');
 
   $scope.fbUser = localStorage.getObject('user');
   console.log("fbUser--- ", JSON.stringify($scope.fbUser));
-  
+
+  $scope.itemsList = ITEMSLIST;
+
   //Объявление функций
   $scope.getSalamiUser = function(){
     $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.fbUser.id).then(function(data) {
@@ -64,7 +66,10 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
     if($scope.salami_user.profile_picture !== $scope.fbUser.avatar){
       userTemp.profile_picture = $scope.fbUser.avatar;
     }
-
+    if($scope.salami_user.collection_type !== localStorage.getObject('collection_type')){
+      userTemp.collection_type = localStorage.getObject('collection_type');
+      document.getElementById('colType').innerHTML = localStorage.getObject('collection_type');
+    }
     if(JSON.stringify(userTemp) != '{}'){
       $scope.updateUser("salamiusers/" + $scope.salami_user.id, userTemp);
     }
@@ -134,6 +139,7 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
            console.log("err--" + JSON.stringify(response));
         });
     }
+    $ionicLoading.hide();
   };
 
   //вызов
@@ -141,14 +147,26 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
   $scope.getFbAlbums();
 
   $scope.updateMyData = function(){
+    $ionicLoading.show({ template: 'Please wait...' });
     $scope.getSalamiUserByMod();
+
   }
 
   $scope.deleteMyData = function(){
 
     $http.delete(API_URL + "salamiusers/" + $scope.salami_user.id, { ignoreAuthModule: true })
       .success(function (data) {
-        console.log('delete finally ' + data);
+        console.log('delete  ' + data);
+
+        facebookConnectPlugin.logout(function(response) {
+        $ionicHistory.clearCache();
+        $ionicHistory.clearHistory();
+        $ionicPopup.alert({
+          title: 'message',
+          template: "Delete and log out done."
+      });
+    });
+
         $state.go('start');
     });
   }
@@ -167,7 +185,7 @@ starter.controller('AlbumsCtrl', function($scope, $http, localStorage) {
 
 })
 
-starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $state, localStorage) {
+starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $state, localStorage, $ionicLoading) {
 
   $ionicHistory.clearHistory();
 
@@ -237,8 +255,7 @@ starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $stat
 
 })
 
-starter.controller('PhotosCtrl', function($scope, $state, $http, localStorage) {
-  
+starter.controller('PhotosCtrl', function($scope, $state, $http, localStorage, $ionicLoading) {
   $scope.$on('$ionicView.enter', function(){
     console.log('album_id___in localStorage___photos '+ localStorage.get('albId'));
     var albumId = localStorage.get('albId');

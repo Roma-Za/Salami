@@ -64,6 +64,8 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
     // when the response is available
      console.log("response---" + JSON.stringify(response));
      console.log("id---" + response.data.id);
+     localStorage.set('myId', response.data.id);
+      localStorage.setObject("user", user);
      $scope.createAlbum(response.data.id);
 
   }, function(response) {
