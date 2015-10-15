@@ -1,30 +1,40 @@
-starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate) {
+starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, $state, localStorage, $http) {
 
   $scope.hideTime = true;
-
-  var alternate,
-    isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
-
+  $scope.salami_user = localStorage.getObject('salami_user');
+  $scope.recipient = JSON.parse(localStorage.getObject("recipient"));
   $scope.sendMessage = function() {
-    alternate = !alternate;
 
     var d = new Date();
     d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
 
     $scope.messages.push({
-      userId: alternate ? '12345' : '54321',
+      userId: $scope.salami_user.id,
       text: $scope.data.message,
       time: d
     });
 
+    var mes = {};
+    mes.text = $scope.data.message;
+    var y = new Date();
+    mes.created_at = y;
+    mes.sender_id = $scope.myId;
+    mes.recipient_id = $scope.recipient.id;
+    mes.state = 'new';
+    console.log('mes_____'+ JSON.stringify(mes));
+
+    $http.post(API_URL + "messages", mes).then(function(response) {
+      console.log("response-mes--" + JSON.stringify(response));
+      }, function(response) {
+        console.log("err-" + JSON.stringify(response));
+      });
+
     delete $scope.data.message;
     $ionicScrollDelegate.scrollBottom(true);
-
   };
 
 
   $scope.inputUp = function() {
-    if (isIOS) $scope.data.keyboardHeight = 216;
     $timeout(function() {
       $ionicScrollDelegate.scrollBottom(true);
     }, 300);
@@ -32,7 +42,6 @@ starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate) 
   };
 
   $scope.inputDown = function() {
-    if (isIOS) $scope.data.keyboardHeight = 0;
     $ionicScrollDelegate.resize();
   };
 
@@ -42,7 +51,9 @@ starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate) 
 
 
   $scope.data = {};
-  $scope.myId = '12345';
+  $scope.myId = $scope.salami_user.id;
+  var t = new Date();
+    t = t.toLocaleTimeString().replace(/:\d+ /, ' ');
   $scope.messages = [];
 
 });

@@ -50,6 +50,14 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
     $http({method:'PUT', url: API_URL + "salamiusers/" + id, data: user})
       .then(function(resp){
         console.log("PUTresponse---" + JSON.stringify(resp));
+
+        $http.get(API_URL + "salamiusers/search?id=" + id).then(function(data) {
+            console.log('coord_update   ', JSON.stringify(data));
+            localStorage.setObject("salami_user", data.data[0]);
+          }, function(err) {
+            console.error('ERR', err);       
+          }); 
+
       },
         function(err){
           console.log("PUTerr---" + JSON.stringify(err));
