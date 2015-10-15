@@ -1,44 +1,35 @@
 starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage, $state, $ionicLoading) {
   localStorage.setObject("selectedAlbum", '{}');
 
-  $scope.fbUser = localStorage.getObject('user');
+  $scope.fbUser = localStorage.getObject('fb_user');
   console.log("fbUser--- ", JSON.stringify($scope.fbUser));
+  $scope.salami_user = localStorage.getObject('salami_user');
+  console.log("salami_user--- ", JSON.stringify($scope.salami_user));
 
   $scope.itemsList = ITEMSLIST;
 
   //Объявление функций
-  $scope.getSalamiUser = function(){
-    $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.fbUser.id).then(function(data) {
-      console.log("__data__", JSON.stringify(data));
-      $scope.salami_user = data.data[0];     
+  $scope.reSaveSalamiUser = function(){
+     $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.fbUser.id).then(function(data) {
+      console.log('isExist data   ', JSON.stringify(data));
+        localStorage.setObject("salami_user", data.data[0]);
+        $scope.salami_user = data.data[0];
     }, function(err) {
-      console.log("__err__", JSON.stringify(err));
+      console.error('ERR', err);
     });
   }
 
   $scope.getSalamiUserByMod = function(){
-    $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.fbUser.id).then(function(data) {
-      console.log("__data__", JSON.stringify(data));
-      $scope.salami_user = data.data[0];
-      $scope.salamiUserModification();  
-
-      $scope.album = {};
-      if(localStorage.getObject("selectedAlbum")!='{}'){
-        $scope.album = JSON.parse(localStorage.getObject("selectedAlbum"));
-        console.log("album 1111111 "+ JSON.stringify($scope.album));
-      }else{
-        $scope.album = $scope.salami_user.albums[0];
-        console.log("album 222222 "+ JSON.stringify($scope.album));
-      }
-      console.log("album 333333333 "+ JSON.stringify($scope.album));
+    $scope.salamiUserModification();  
+    $scope.album = {};
+    if(localStorage.getObject("selectedAlbum")!=='{}'){
+      $scope.album = JSON.parse(localStorage.getObject("selectedAlbum"));
+      console.log("album 1111111 "+ JSON.stringify($scope.album));
 
       if($scope.salami_user.albums[0].facebook_album_id !== $scope.album.id){
         $scope.salamiAlbumMod();
       }
-        
-    }, function(err) {
-      console.log("__err__", JSON.stringify(err));
-    });
+    }    
   }
 
   $scope.getFbAlbums = function(){
@@ -63,8 +54,8 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
     if($scope.salami_user.gender !== $scope.fbUser.gender){
       userTemp.gender = $scope.fbUser.gender;
     }
-    if($scope.salami_user.profile_picture !== $scope.fbUser.avatar){
-      userTemp.profile_picture = $scope.fbUser.avatar;
+    if($scope.salami_user.profile_picture !== $scope.fbUser.profile_picture){
+      userTemp.profile_picture = $scope.fbUser.profile_picture;
     }
     if($scope.salami_user.collection_type !== localStorage.getObject('collection_type')){
       userTemp.collection_type = localStorage.getObject('collection_type');
@@ -79,6 +70,7 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
     $http({method:'PUT', url: API_URL + strPath, data: new_data})
     .then(function(resp){
       console.log("PUTresponse---" + JSON.stringify(resp));
+      $scope.reSaveSalamiUser();
     }), 
     function(err){
       console.log("PUTerr---" + JSON.stringify(err));
@@ -96,16 +88,12 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
   $scope.createAlbum = function(userId){
     var user = {};
     user.currentAlb = $scope.album;
-    console.log("description" + JSON.stringify(user.currentAlb.description));
     var alb = {};
     alb.facebook_album_id = user.currentAlb.id;
     alb.name = user.currentAlb.name;
     alb.description = Utils.getUserDate(user, 'description');
     alb.picture_url = Utils.getUserDate(user, 'picture_url');
     alb.user_id = userId;
-
-    var stralb = JSON.stringify(alb);
-    console.log("alb---" + stralb);
 
     $http.post(API_URL + "albums", alb).then(function(response) {
       console.log("response-alb--" + JSON.stringify(response));
@@ -132,24 +120,27 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
       var photo = {};
       photo.picture_url = photosArr[i].source;
       photo.album_id = albumId;
-      $http.post(API_URL + "photos", photo).
-        then(function(response) {
-          console.log("response-photo--" + JSON.stringify(response));
-        }, function(response) {
-           console.log("err--" + JSON.stringify(response));
-        });
+
+      $http.post(API_URL + "photos", photo, { ignoreAuthModule: true })
+      .success(function (data) {
+        console.log("data-photo--" + JSON.stringify(data));
+ 
+      })
+      .error(function (data) {
+        console.log("data-err--" + JSON.stringify(data));
+          
+      });
     }
-    $ionicLoading.hide();
+    $scope.reSaveSalamiUser();
   };
 
   //вызов
-  $scope.getSalamiUser();
   $scope.getFbAlbums();
 
   $scope.updateMyData = function(){
     $ionicLoading.show({ template: 'Please wait...' });
     $scope.getSalamiUserByMod();
-
+    $ionicLoading.hide();
   }
 
   $scope.deleteMyData = function(){
@@ -200,7 +191,6 @@ starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $stat
     var albumId = JSON.parse(selectedCard).albums[0].album_id;
     console.log('album_id___ '+ albumId);
     localStorage.set('albId', albumId);
-    console.log('album_id___in localStorage '+ localStorage.get('albId'));
     $state.go('photos');
   }
 
@@ -245,7 +235,7 @@ starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $stat
       console.log("__err__", JSON.stringify(err));
 
       $http.post(API_URL + "likes", obj).then(function(response) {
-        console.log("response-dislike--" + JSON.stringify(response));
+        console.log("response-" + JSON.stringify(response));
       }, function(response) {
         console.log("err-" + JSON.stringify(response));
       });
@@ -253,17 +243,25 @@ starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $stat
 
   }
 
+  $scope.sendMess = function(item){
+    localStorage.setObject("recipient", item);
+    $state.go('chat');
+  }
+
 })
 
 starter.controller('PhotosCtrl', function($scope, $state, $http, localStorage, $ionicLoading) {
+  $ionicLoading.show({ template: 'Please wait...' });
   $scope.$on('$ionicView.enter', function(){
     console.log('album_id___in localStorage___photos '+ localStorage.get('albId'));
     var albumId = localStorage.get('albId');
     $http.get(API_URL + "photos/search?album_id=" + albumId).then(function(data) {
       console.log("__photos__", JSON.stringify(data.data));
       $scope.photos = data.data;
+      $ionicLoading.hide();
     }, function(err) {
       console.log("__err__", JSON.stringify(err));
+      $ionicLoading.hide();
     });
   });
    

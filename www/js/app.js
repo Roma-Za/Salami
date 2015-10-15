@@ -43,6 +43,12 @@ starter.run(function($ionicPlatform) {
       controller: 'LoginCtrl'
   })
 
+  .state('chat', {
+      url: '/chat',
+      templateUrl: 'templates/chat.html',
+      controller: 'Messages'
+  })
+
   .state('findlocation', {
     url: "/findlocation",
     templateUrl: "templates/map.html",

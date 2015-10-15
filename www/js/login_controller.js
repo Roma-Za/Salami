@@ -1,13 +1,9 @@
 starter.controller('LoginCtrl',
 function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
-  $scope.user = localStorage.getObject('user');
   $scope.albums =  localStorage.getObject("albums");
-  $scope.message = "";
-  $ionicHistory.clearHistory();
-
+  $scope.fb_user = localStorage.getObject("fb_user");
   $scope.checkLoginState = function(){
     if (!facebookConnectPlugin || !Utils.checkConnection($ionicPopup)) return;
-    console.log('checkLoginState');
     facebookConnectPlugin.getLoginStatus(function(response) {
       $scope.statusChangeCallback(response);
     });
@@ -55,14 +51,15 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
           function (success) {
             console.log("success: " + JSON.stringify(success));
             if (success && !success.error) {             
-              $scope.user = {};
-              $scope.user.avatar = Utils.getUserPicture(success);
-              $scope.user.name = success.name;
-              $scope.user.email = Utils.getUserDate(success, 'email');
-              $scope.user.birthday = Utils.getUserDate(success, 'birthday');
-              $scope.user.gender = Utils.getUserDate(success, 'gender');
-              $scope.user.id = success.id;
-              $scope.getFbAlbums(); 
+              
+              $scope.fb_user.profile_picture = success.picture.data.url;
+              $scope.fb_user.name = success.name;
+              $scope.fb_user.email = Utils.getUserDate(success, 'email');
+              $scope.fb_user.birthday = Utils.getUserDate(success, 'birthday');
+              $scope.fb_user.gender = Utils.getUserDate(success, 'gender');
+              $scope.fb_user.id = success.id;
+              localStorage.setObject("fb_user", $scope.fb_user);
+              $scope.isExist();
             }
           },
           function (error) {
@@ -76,21 +73,17 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
       
       $scope.albums = response.albums.data;
       localStorage.setObject("albums", $scope.albums);
-      $scope.user.currentAlb = localStorage.getObject("selectedAlbum");
-      localStorage.setObject('user', $scope.user);
-
-      $scope.isExist();
-
-      
+      $state.go('loginAlbums');
     });
   };
 
   $scope.isExist = function(){
-    $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.user.id).then(function(data) {
+    $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.fb_user.id).then(function(data) {
       console.log('isExist data   ', JSON.stringify(data));
       if(data.data.length>0){
         console.log('IIIIIIIIIIIIIIIIIIIIIIIIDDDDDDDDDDDDDDDDDDD', data.data[0].id);
         localStorage.set('myId', data.data[0].id);
+        localStorage.setObject("salami_user", data.data[0]);
         $state.go('app.playlists');
       }else{
         $state.go('loginProfile');
@@ -102,32 +95,31 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
   };
 
   $scope.getPhotos = function(){
-    facebookConnectPlugin.api( ''+$scope.user.currentAlb.id+'/photos?fields=source', 
+    facebookConnectPlugin.api( ''+$scope.fb_user.currentAlb.id+'/photos?fields=source', 
       ["public_profile", "user_photos"], function(response) {
-        $scope.user.photos = response.data;
-        $scope.user.collection_type = localStorage.getObject('collection_type');
-        localStorage.setObject("user", $scope.user);
+        $scope.fb_user.photos = response.data;
+        $scope.fb_user.collection_type = Utils.getCollectionType(localStorage.getObject('collection_type'));
+        localStorage.setObject("fb_user", $scope.fb_user);
       });
     window.history.back();
   };
 
   $scope.selectAlbum = function(selectedAlb){
-    $scope.user.currentAlb = JSON.parse(selectedAlb);
+    $scope.fb_user.currentAlb = JSON.parse(selectedAlb);
     localStorage.setObject("selectedAlbum", selectedAlb);
     document.getElementById('currAlbum').innerHTML = JSON.parse(selectedAlb).name;
     $scope.getPhotos();
   };
 
   $scope.goToAlbums = function(){
-    console.log(localStorage.get("user"));
-    $state.go('loginAlbums');
+    $scope.getFbAlbums();
   };
 
   $scope.itemsList = ITEMSLIST;
 
   $scope.goToMap = function(){
-    $scope.temp = localStorage.getObject("user");
-    console.log("temp " + $scope.temp.photos);
+    $scope.temp = localStorage.getObject("fb_user");
+    console.log("temp photos" + JSON.stringify($scope.temp.photos));
     if($scope.temp.photos){
       $state.go('loginMap');     
     }else{

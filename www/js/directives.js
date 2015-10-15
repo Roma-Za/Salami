@@ -38,7 +38,7 @@ starter.directive('map', function() {
       itemsList: '=',
       placeholder: '@'
     },
-    template: '<input type="text" ng-model="search" ng-change="customValue()" placeholder="{{ placeholder }}" />' +
+    template: '<input type="text" ng-model="search" on-return="customValue()" placeholder="{{ placeholder }}" />' +
         '<div class="search-item-list"><ul class="dropdownlist">' +
         '<li ng-repeat="item in itemsList | filter:search" ng-click="chooseItem( item )">{{ item.name }}' + '</li>' + '</ul></div>',
     link: function($scope, el, attr){
@@ -61,7 +61,45 @@ starter.directive('map', function() {
        };
        $scope.customValue = function() {
         localStorage.setObject('collection_type', $scope.search);
+        cordova.plugins.Keyboard.close();
        };
+    }
+  }
+})
+.directive('input', function($timeout) {
+  return {
+    restrict: 'E',
+    scope: {
+      'returnClose': '=',
+      'onReturn': '&',
+      'onFocus': '&',
+      'onBlur': '&'
+    },
+    link: function(scope, element, attr) {
+      element.bind('focus', function(e) {
+        if (scope.onFocus) {
+          $timeout(function() {
+            scope.onFocus();
+          });
+        }
+      });
+      element.bind('blur', function(e) {
+        if (scope.onBlur) {
+          $timeout(function() {
+            scope.onBlur();
+          });
+        }
+      });
+      element.bind('keydown', function(e) {
+        if (e.which == 13) {
+          if (scope.returnClose) element[0].blur();
+          if (scope.onReturn) {
+            $timeout(function() {
+              scope.onReturn();
+            });
+          }
+        }
+      });
     }
   }
 });

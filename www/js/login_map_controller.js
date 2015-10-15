@@ -1,7 +1,7 @@
 starter.controller('LoginMapCtrl',
 function($scope, $ionicPopup, localStorage, $http, $state) {
 
-  $scope.tempUser = JSON.parse(localStorage.get("user"));
+  $scope.tempUser = JSON.parse(localStorage.get("fb_user"));
   $scope.tempUser.location =',';
   $scope.centerOnMe = function () {
     if (!$scope.map) {
@@ -45,28 +45,28 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
 
 
   $scope.createUser = function(){
+    var temptype = {};
     var user = {};
     user.email = $scope.tempUser.email;
     user.name = $scope.tempUser.name;
     user.birthday = $scope.tempUser.birthday;
     user.gender = $scope.tempUser.gender;
     user.facebook_id = $scope.tempUser.id;
-    user.profile_picture = $scope.tempUser.avatar;
-    user.collection_type = Utils.getUserDate($scope.tempUser, 'collection_type');
+    user.profile_picture = $scope.tempUser.profile_picture;
+    user.collection_type = $scope.tempUser.collection_type;
     user.location = $scope.tempUser.location;
     
-    var struser = JSON.stringify(user);
-    console.log("oky---" + struser);
+    console.log("oky---" + JSON.stringify(user));
 
   $http.post(API_URL + "salamiusers", user).
   then(function(response) {
     // this callback will be called asynchronously
     // when the response is available
-     console.log("response---" + JSON.stringify(response));
-     console.log("id---" + response.data.id);
-     localStorage.set('myId', response.data.id);
-      localStorage.setObject("user", user);
-     $scope.createAlbum(response.data.id);
+    console.log("response---" + JSON.stringify(response));
+    console.log("id---" + response.data.id);
+    localStorage.set('myId', response.data.id);
+    localStorage.setObject("salami_user", user);
+    $scope.createAlbum(response.data.id);
 
   }, function(response) {
     // called asynchronously if an error occurs
@@ -76,7 +76,7 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
       template: JSON.stringify(response)
     });
   });
-  $state.go('app.playlists');
+  
   };
 
   $scope.createAlbum = function(userId){
@@ -87,12 +87,20 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
     album.picture_url = Utils.getUserDate($scope.tempUser, 'picture_url');
     album.user_id = userId;
 
-    var stralb = JSON.stringify(album);
-    console.log("alb---" + stralb);
+    console.log("alb---" + JSON.stringify(album));
 
     $http.post(API_URL + "albums", album).then(function(response) {
       console.log("response-alb--" + JSON.stringify(response));
       console.log("id---" + response.data.album_id);
+      //перепишу для использования объекта в дальнейшем в виде ответа с сервера, а не собранного в ручную
+      $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.tempUser.id).then(function(data) {
+            console.log('isExist data   ', JSON.stringify(data));
+            localStorage.setObject("salami_user", data.data[0]);
+          }, function(err) {
+            console.error('ERR', err);
+            
+          }); 
+
       $scope.addPhotos(response.data.album_id);
       }, function(response) {
       // called asynchronously if an error occurs
@@ -107,23 +115,25 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
 
   $scope.addPhotos = function(albumId){
     var photosArr = $scope.tempUser.photos;
-    for (var i = 0; i < photosArr.length; i++) {
+    var i = 0;
+    while(i < photosArr.length){
       var photo = {};
       photo.picture_url = photosArr[i].source;
       photo.album_id = albumId;
-      $http.post(API_URL + "photos", photo).
-        then(function(response) {
-          console.log("response-photo--" + JSON.stringify(response));
-        }, function(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-          $ionicPopup.alert({
-            title: 'message2',
-            template: JSON.stringify(response)
-          });
-        });
-    }
-  };
+      console.log("i = "+i+" length = " + photosArr.length + "photo = " + JSON.stringify(photo));
 
+      $http.post(API_URL + "photos", photo, { ignoreAuthModule: true })
+      .success(function (data) {
+        console.log("data-photo--" + JSON.stringify(data));
+ 
+      })
+      .error(function (data) {
+        console.log("data-err--" + JSON.stringify(data));
+          
+      });
+    i++;
+    };
+    $state.go('app.playlists');
+  };
 
 });

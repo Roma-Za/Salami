@@ -2,17 +2,17 @@
     <ion-content>
         <div class="wrapper">
             <div class="profile-ava mt-25">
-                <img src="{{user.avatar}}" />
+                <img src="{{fb_user.profile_picture}}" />
             </div>
             <div class="profile-name">
                 <div class="mt-5 mb-20">
-                    <h2>{{user.name}}</h2>
+                    <h2>{{fb_user.name}}</h2>
                 </div>
             </div>
             <div class="white-box profile-data">
-                <p><span>Email:</span> {{user.email}}</p>
-                <p><span>Date of birth:</span> {{user.birthday}}</p>
-                <p><span>Gender:</span> {{user.gender}}</p>
+                <p><span>Email:</span> {{fb_user.email}}</p>
+                <p><span>Date of birth:</span> {{fb_user.birthday}}</p>
+                <p><span>Gender:</span> {{fb_user.gender}}</p>
                 <p><span>Public album:</span> <span id = "currAlbum"></span></p>
                 <p><span>Type of collection: </span></p> 
                 <div ng-app="app" ng-controller="LoginCtrl">

@@ -29,7 +29,13 @@ Utils.getUserPicture = function(user) {
     return user.picture.data.url;
   }
 };
-
+Utils.getCollectionType = function(type) {
+  if (typeof type !== "string" || type.length === 0) {
+    return "unknown";
+  } else {
+    return type;
+  }
+};
 Utils.getUserDate = function(user, field) {
   switch(field){
     case 'birthday':
