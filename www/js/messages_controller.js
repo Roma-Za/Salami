@@ -1,8 +1,43 @@
-starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, $state, localStorage, $http) {
+starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, $state, localStorage, $http, $interval) {
 
   $scope.hideTime = true;
   $scope.salami_user = localStorage.getObject('salami_user');
   $scope.recipient = JSON.parse(localStorage.getObject("recipient"));
+
+  $scope.callAtInterval = function(){
+    console.log("Interval occurred");
+    $scope.recipient = JSON.parse(localStorage.getObject("recipient"));
+    if(!$scope.users[$scope.recipient.id]){
+      $scope.users[$scope.recipient.id] = [];
+    }
+    $scope.messages = $scope.users[$scope.recipient.id];
+    $http.get(API_URL + "messages/search?sender_id=" + $scope.recipient.id + "&recipient_id=" + $scope.myId + "&state=new").then(function(data) {
+      console.log("__data__", JSON.stringify(data));
+
+      for (var i = 0; i < data.data.length; i++) {
+        var t = new Date(data.data[i].created_at);
+        t = t.toLocaleTimeString().replace(/:\d+ /, ' ');
+
+        $scope.messages.push({
+          userId: $scope.recipient.id,
+          text: data.data[i].text,
+          time: t
+        });
+
+        $http({method:'PUT', url: API_URL + "messages/" + data.data[i].id, data: {state: 'read'}})
+        .then(function(resp){
+          console.log("PUTresponse---" + JSON.stringify(resp));
+        }), 
+        function(err){
+          console.log("PUTerr---" + JSON.stringify(err));
+        }
+      }
+    }, function(err) {
+      console.log("__err__", JSON.stringify(err));
+    });
+    $scope.users[$scope.recipient.id] = $scope.messages;
+  }
+
   $scope.sendMessage = function() {
 
     var d = new Date();
@@ -48,12 +83,13 @@ starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, 
   $scope.closeKeyboard = function() {
     cordova.plugins.Keyboard.close();
   };
-
-
+  $timeout($scope.callAtInterval, 0);
+  $interval($scope.callAtInterval, 5000);
+  $scope.users = [];
+  $scope.users[$scope.recipient.id] = [];
   $scope.data = {};
   $scope.myId = $scope.salami_user.id;
-  var t = new Date();
-    t = t.toLocaleTimeString().replace(/:\d+ /, ' ');
   $scope.messages = [];
-
+  $scope.messages = $scope.users[$scope.recipient.id];
+  
 });

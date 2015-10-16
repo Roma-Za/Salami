@@ -250,7 +250,7 @@ starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $stat
 
 })
 
-starter.controller('PhotosCtrl', function($scope, $state, $http, localStorage, $ionicLoading) {
+starter.controller('PhotosCtrl', function($scope, $state, $http, localStorage, $ionicLoading, $timeout) {
   $ionicLoading.show({ template: 'Please wait...' });
   $scope.$on('$ionicView.enter', function(){
     console.log('album_id___in localStorage___photos '+ localStorage.get('albId'));

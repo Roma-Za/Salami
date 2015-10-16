@@ -103,6 +103,16 @@ starter.run(function($ionicPlatform) {
       }
     })
 
+   .state('app.chatList', {
+      url: '/chatList',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/chatList.html',
+           controller: 'ChatListCtrl'
+        }
+      }
+    })
+
    .state('app.map', {
       url: '/map',
       views: {
