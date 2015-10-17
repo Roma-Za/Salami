@@ -1,6 +1,6 @@
 starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, $state, localStorage, $http, $interval) {
 
-  $scope.hideTime = true;
+  $scope.hideTime = false;
   $scope.salami_user = localStorage.getObject('salami_user');
   $scope.recipient = JSON.parse(localStorage.getObject("recipient"));
 
@@ -15,13 +15,13 @@ starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, 
       console.log("__data__", JSON.stringify(data));
 
       for (var i = 0; i < data.data.length; i++) {
-        var t = new Date(data.data[i].created_at);
-        t = t.toLocaleTimeString().replace(/:\d+ /, ' ');
+        var dateAt = new Date(data.data[i].created_at);
+        time = dateAt.toLocaleString('en-US', DATE_TIME_OPTS);
 
         $scope.messages.push({
           userId: $scope.recipient.id,
           text: data.data[i].text,
-          time: t
+          time: time
         });
 
         $http({method:'PUT', url: API_URL + "messages/" + data.data[i].id, data: {state: 'read'}})
@@ -40,13 +40,13 @@ starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, 
 
   $scope.sendMessage = function() {
 
-    var d = new Date();
-    d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
+    var dateAt = new Date();
+    time = dateAt.toLocaleString('en-US', DATE_TIME_OPTS);
 
     $scope.messages.push({
       userId: $scope.salami_user.id,
       text: $scope.data.message,
-      time: d
+      time: time
     });
 
     var mes = {};

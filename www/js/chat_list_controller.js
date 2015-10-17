@@ -27,7 +27,7 @@ starter.controller('ChatListCtrl', function($scope, $state, localStorage, $http,
 
     }, function(err) {
       console.log("__err__", JSON.stringify(err));
-    });
+  });
 
   }
 
