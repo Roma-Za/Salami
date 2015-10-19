@@ -176,16 +176,85 @@ starter.controller('AlbumsCtrl', function($scope, $http, localStorage) {
 
 })
 
-starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $state, localStorage, $ionicLoading) {
+starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $state, localStorage, $ionicLoading, $timeout, $interval) {
 
-  $ionicHistory.clearHistory();
-
+  //$ionicHistory.clearHistory();
+  localStorage.set('isChanged', true);
+/*
   $http.get(API_URL + "salamiusers/search").then(function(data) {
+
     console.log('Success        list       ', JSON.stringify(data.data));
     $scope.userlists = data.data;
+
   }, function(err) {
     console.error('ERR     list      ', err);
   });
+*/
+
+  $scope.duildUrl = function(settings){
+    var strQuery = 'salamiusers/search';
+    if($scope.settings.distance!==-1){ 
+      var dis = "distance=" + $scope.settings.distance;
+    }
+
+    if($scope.settings.collection_type!=="_"){
+      var type = "collection_type=" + $scope.settings.collection_type;
+    }
+
+    if(dis){
+      strQuery = strQuery + "?" + dis;
+      if(type){
+        strQuery = strQuery + "&" + type;
+      } 
+    }else{
+      if(type){
+        strQuery = strQuery + "?" + type;
+      } 
+    }
+    return strQuery;
+  }
+
+  $scope.updateUserlists = function(){
+
+    var isChanged = localStorage.get('isChanged');
+    console.log("isChanged", isChanged);
+    if(isChanged){
+      $http.get(API_URL + "settings/" + localStorage.get('myId')).then(function(data) {
+
+        console.log("__data__settings", JSON.stringify(data));
+        $scope.settings = data.data;
+        var str =  $scope.duildUrl($scope.settings);
+
+        $http.get(API_URL + str).then(function(data) {
+
+          console.log('Success        list       ', JSON.stringify(data.data));
+          $scope.userlists = data.data;
+
+        }, function(err) {
+          console.error('ERR     list      ', err);
+        });
+
+      }, function(err) {
+
+        console.log("__err__", JSON.stringify(err));
+        $http.get(API_URL + "salamiusers/search").then(function(data) {
+
+          console.log('Success        list       ', JSON.stringify(data.data));
+          $scope.userlists = data.data;
+
+        }, function(err) {
+          console.error('ERR     list      ', err);
+        });
+
+      });
+
+      localStorage.set('isChanged', false);
+    }
+  }
+
+
+  $timeout($scope.updateUserlists, 10);
+  $interval($scope.updateUserlists, 5000);
 
   $scope.showPhotos = function(selectedCard){
     var albumId = JSON.parse(selectedCard).albums[0].album_id;
@@ -268,5 +337,71 @@ starter.controller('PhotosCtrl', function($scope, $state, $http, localStorage, $
 
 })
 
+starter.controller('SearchCtrl', function($scope, $state, $http, localStorage) {
+  $scope.itemsList = ITEMSLIST;
+  $scope.settings = {};
+  $scope.settings.salami_user_id = localStorage.get('myId');
+  $scope.distance = -1;
+  localStorage.setObject('collection_type', "_");
+  $scope.placeholder_dis = "distance (km)";
+  $scope.placeholder_type = "type of collection";
+
+  $scope.$on('$ionicView.enter', function(){
+    $http.get(API_URL + "settings/search?salami_user_id=" + $scope.settings.salami_user_id).then(function(data) {
+        console.log("__data__", JSON.stringify(data));
+        $scope.placeholder_dis = data.data.distance + " (km)";
+        $scope.placeholder_type = data.data.collection_type;
+        $scope.cType = data.data.collection_type;
+    }, function(err) {
+      console.log("__err__", JSON.stringify(err));
+      $scope.cType = "_";
+    });
+  });
+
+
+  $scope.closeKeyboard = function() {
+    cordova.plugins.Keyboard.close();
+    $scope.settings.distance = $scope.distance;
+    localStorage.setObject('distance', $scope.distance);
+    console.log(JSON.stringify($scope.distance));
+  };
+
+  $scope.goToUserList = function(){
+    if($scope.distance!==-1){
+      $scope.settings.distance = $scope.distance;
+    }
+
+    if(localStorage.getObject('collection_type') == ""){
+      localStorage.setObject('collection_type', "_");
+    }
+    if(!(localStorage.getObject('collection_type') == "_" && $scope.cType == "_")){
+      $scope.settings.collection_type = localStorage.getObject('collection_type');
+    }
+    console.log(JSON.stringify($scope.settings));
+
+    $http.get(API_URL + "settings/search?salami_user_id=" + $scope.settings.salami_user_id).then(function(data) {
+      console.log("__data__", JSON.stringify(data));
+      $http({method:'PUT', url: API_URL + "settings/" + $scope.settings.salami_user_id, data: $scope.settings})
+        .then(function(resp){
+          console.log("PUTresponse---" + JSON.stringify(resp));
+        }), 
+        function(err){
+          console.log("PUTerr---" + JSON.stringify(err));
+        }
+
+    }, function(err) {
+      console.log("__err__", JSON.stringify(err));
+
+      $http.post(API_URL + "settings", $scope.settings).then(function(response) {
+        console.log("response-" + JSON.stringify(response));
+      }, function(response) {
+        console.log("err-" + JSON.stringify(response));
+      });
+    });
+    localStorage.set('isChanged', true);
+    $state.go('app.playlists');
+  }
+
+})
 starter.controller('PlaylistCtrl', function($scope, $stateParams) {
 });
