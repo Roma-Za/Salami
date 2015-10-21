@@ -1,0 +1,211 @@
+/*--------------------- PROFILE -----------------------*/
+.img-circle {
+    border-radius: 50%;
+}
+.profile-ava {
+    text-align: center;
+}
+.profile-ava img {
+    border: 3px solid #fff;
+    max-width: 300px;
+}
+.profile-name {
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+}
+.white-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+}
+.profile-data span {
+    font-weight: 600;
+}
+.profile-data p {
+    color: #5f6692;
+    padding: 10px 20px;
+    border-bottom: 2px solid #d9d3df;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+.profile-data p:last-child {
+    border-bottom: none;
+}
+.ion-android-arrow-back:before {
+    content: "\f124";
+    color: #fff;
+}
+
+map {
+  display: block;
+  width: 100%;
+  height: 90%;
+}
+
+.scroll {
+  height: 100%;
+}
+
+/*--------------------- MARGINS -----------------------*/
+.wrapper {
+    padding: 10px;
+}
+.mr-10 {
+    margin-right: 10px;
+}
+.ml-10 {
+    margin-left: 10px;
+}
+.mt-5 {
+    margin-top: 5px;
+}
+.mt-10 {
+    margin-top: 10px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.mt-25 {
+    margin-top: 25px;
+}
+.mb-5 {
+    margin-bottom: 5px;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+/*-----------------dropdownlist------------------*/
+
+input {
+  padding: 3px 5px;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+.dropdownlist {
+  list-style-type: none;
+  margin: 0;
+  opacity: 0;
+  padding: 4px 7px;
+  position: absolute;
+  margin-left: -1000px;
+  background: white;
+  box-shadow: 1px 1px 6px rgb(195, 195, 195);
+  border-radius: 2px;
+  z-index: 4;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.dropdownlist li {
+  padding: 3px 5px;
+  cursor: pointer;
+}
+
+.dropdownlist li:hover {
+  background: lightgray;
+}
+
+.show .dropdownlist { 
+  margin-left: 0;
+  opacity: 1;
+}
+
+.dropdownlist li .amount {
+  display: inline-block;
+  padding: 2px 3px;
+  background-color: rgb(83, 177, 211);
+  border-radius: 3px;
+  margin: 0 0 3px 10px;
+  font-size: 65%;
+  color: white;
+}
+/*---------------Chat----------------*/
+$stable:                          #f8f8f8 !default;
+
+.scroll {
+  padding: 10px 0 50px !important;
+}
+
+.messages {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 20px; 
+}
+.messages .message {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 10px;
+  -webkit-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
+  overflow: hidden;
+  text-align: left;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); 
+}
+.time {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  align-self: auto;
+  width: 120px;
+  text-align: center;
+  padding: 0 0 0 0;
+  -webkit-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
+  -webkit-transform: translate3d(10px, 0, 0);
+  -moz-transform: translate3d(10px, 0, 0);
+  transform: translate3d(10px, 0, 0); }
+  .time.slide-right {
+    -webkit-transform: translate3d(130px, 0, 0);
+    -moz-transform: translate3d(130px, 0, 0);
+    transform: translate3d(130px, 0, 0); }
+
+.messages.other .message {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  text-align: right; }
+
+.messages.other .message.slide-right {
+  -webkit-transform: translate3d(120px, 0, 0);
+  -moz-transform: translate3d(120px, 0, 0);
+  transform: translate3d(120px, 0, 0); }
+
+.messages.other span {
+  color: black;
+  background-color: #C7C7CC; 
+}
+span.chat {
+  background: #007AFF;
+  display: inline-block;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: left;
+  max-width: 240px; }

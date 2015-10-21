@@ -1,0 +1,42 @@
+<ion-view view-title="Userlists">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="item in userlists" >
+
+      	<div class="list card">
+
+		  <div class="item item-avatar">
+		    <img src="{{item.profile_picture}}">
+		    <h2>{{item.name}}</h2>
+		    <p>Birthday: {{item.birthday}}</p>
+		    <p>Gender: {{item.gender}}</p>
+		  </div>
+
+		  <div class="item item-body">
+		    <img class="full-image" src="{{item.albums[0].picture_url}}" ng-click = "showPhotos('{{ item }}')">
+		    <p>Album name: {{item.albums[0].name}}</p>
+		    <p>Collection type: {{item.collection_type}}</p>
+		    <p>Description: {{item.albums[0].description}}</p>
+		  </div>
+
+		  <div class="item tabs tabs-secondary tabs-icon-left">
+		    <a class="tab-item" ng-click = "doLike('{{ item }}')">
+		      <i class="icon ion-thumbsup"></i>
+		      Like
+		    </a>
+		    <a class="tab-item" ng-click = "sendMess('{{ item }}')">
+		      <i class="icon ion-chatbox"></i>
+		      Message
+		    </a>
+		    <a class="tab-item" ng-click = "doDislike('{{ item }}')">
+		      <i class="icon ion-thumbsdown"></i>
+		      Dislike
+		    </a>
+		  </div>
+
+		</div>
+      
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

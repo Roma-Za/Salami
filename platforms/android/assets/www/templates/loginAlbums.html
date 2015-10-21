@@ -1,0 +1,18 @@
+<ion-view title="Login Albums">
+    <ion-content>
+
+      <div class="list">
+
+        <a ng-repeat="item in albums" 
+           class="item item-thumbnail-left" ng-click = "selectAlbum('{{ item }}')"
+           >
+          <img ng-src="{{ item.picture.data.url }}">
+          <h2>Name: {{ item.name }}</h2>
+          <h4>Number of photos: {{ item.count }}</h4>
+          <h4>Description: {{ item.description }}</h4>
+        </a>
+
+      </div>
+
+    </ion-content>
+</ion-view>
