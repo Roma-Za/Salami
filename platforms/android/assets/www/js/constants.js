@@ -1,5 +1,5 @@
 var DEFAULT_USER_PICTURE = 'img/default_user_picture.png';
-var API_URL = 'http://d6a66f5b.ngrok.io/serversalami.com/api/web/v1/';
+var API_URL = 'http://10.1.10.22:8000/api/web/v1/';
 var ITEMSLIST = [
     {'name': 'stamps'},
     {'name': 'medals'},

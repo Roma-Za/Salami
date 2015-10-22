@@ -1,11 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Device token" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b77d7e-d526-4d01-bfa8-5f9af0a2d9e8" name="Default" comment="" />
+    <list default="true" id="f9b77d7e-d526-4d01-bfa8-5f9af0a2d9e8" name="Default" comment="">
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\platforms\android\assets\www\plugins\com.ionic.keyboard\www\keyboard.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\platforms\android\assets\www\plugins\cordova-plugin-console\www\console-via-logger.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\platforms\android\assets\www\plugins\cordova-plugin-console\www\logger.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\platforms\android\src\com\ionic\keyboard\IonicKeyboard.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\package.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\android\IonicKeyboard.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\index.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\.cproject" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\.project" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\libKeyboard.so" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\public\json_reader.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\public\json_value.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\public\json_writer.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\public\plugin.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\public\tokenizer.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\src\CallKeyboard.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\src\Logger.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\src\keyboard_js.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\device\src\keyboard_ndk.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json\autolink.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json\config.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json\features.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json\forwards.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json\json.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json\reader.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json\value.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json\writer.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json_batchallocator.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json_internalarray.inl" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json_internalmap.inl" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json_reader.cpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json_value.cpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json_valueiterator.inl" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\json_writer.cpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\plugin.cpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\plugin.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\tokenizer.cpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\public\tokenizer.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\libKeyboard.so" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\public\json_reader.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\public\json_value.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\public\json_writer.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\public\plugin.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\public\tokenizer.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\src\CallKeyboard.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\src\Logger.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\src\keyboard_js.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\simulator\src\keyboard_ndk.o" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\src\Logger.cpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\src\Logger.hpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\src\keyboard_js.cpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\src\keyboard_js.hpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\src\keyboard_ndk.cpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\blackberry10\native\src\keyboard_ndk.hpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\ios\IonicKeyboard.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\ios\IonicKeyboard.m" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\ios\UIWebViewExtension.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\src\ios\UIWebViewExtension.m" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\com.ionic.keyboard\www\keyboard.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\CONTRIBUTING.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\NOTICE" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\RELEASENOTES.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\de\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\de\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\es\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\es\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\fr\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\fr\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\it\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\it\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\ja\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\ja\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\ko\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\ko\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\pl\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\pl\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\ru\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\zh\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\doc\zh\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\package.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\src\ios\CDVLogger.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\src\ios\CDVLogger.m" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\src\ubuntu\console.cpp" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\src\ubuntu\console.h" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\src\wp\DebugConsole.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\tests\plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\tests\tests.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\www\console-via-logger.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-console\www\logger.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-whitelist\doc\de\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-whitelist\doc\es\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-whitelist\doc\fr\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-whitelist\doc\it\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-whitelist\doc\ja\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-whitelist\doc\ko\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-whitelist\doc\pl\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\projects\phonegap\Salami\plugins\cordova-plugin-whitelist\doc\zh\README.md" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ios/CDVDevice.h" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ios/CDVDevice.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ios/CDVDevice.m" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ios/CDVDevice.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/src/ios/CDVNavigationWhitelistPlugin.h" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/src/ios/CDVNavigationWhitelistPlugin.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/src/ios/CDVNavigationWhitelistPlugin.m" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/src/ios/CDVNavigationWhitelistPlugin.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/CONTRIBUTING.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/CONTRIBUTING.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/wp/Device.cs" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/wp/Device.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/apache/cordova/device/Device.java" afterPath="$PROJECT_DIR$/src/org/apache/cordova/device/Device.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/android/Device.java" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/android/Device.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/browser/DeviceProxy.js" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/browser/DeviceProxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/firefoxos/DeviceProxy.js" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/firefoxos/DeviceProxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/tizen/DeviceProxy.js" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/tizen/DeviceProxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/windows/DeviceProxy.js" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/windows/DeviceProxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/LICENSE" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/LICENSE" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/NOTICE" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/NOTICE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/NOTICE" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/NOTICE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/de/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/de/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/es/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/es/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/fr/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/fr/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/it/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/it/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ja/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ja/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ko/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ko/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/pl/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/pl/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/zh/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/zh/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/README.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/RELEASENOTES.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/RELEASENOTES.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/RELEASENOTES.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/RELEASENOTES.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/apache/cordova/whitelist/WhitelistPlugin.java" afterPath="$PROJECT_DIR$/src/org/apache/cordova/whitelist/WhitelistPlugin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/src/android/WhitelistPlugin.java" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/src/android/WhitelistPlugin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/android.json" afterPath="$PROJECT_DIR$/../../plugins/android.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/app.js" afterPath="$PROJECT_DIR$/assets/www/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/js/app.js" afterPath="$PROJECT_DIR$/../../www/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/config.xml" afterPath="$PROJECT_DIR$/res/xml/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/constants.js" afterPath="$PROJECT_DIR$/assets/www/js/constants.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/js/constants.js" afterPath="$PROJECT_DIR$/../../www/js/constants.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/controllers.js" afterPath="$PROJECT_DIR$/assets/www/js/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/js/controllers.js" afterPath="$PROJECT_DIR$/../../www/js/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/cordova_plugins.js" afterPath="$PROJECT_DIR$/assets/www/cordova_plugins.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ubuntu/device.cpp" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ubuntu/device.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ubuntu/device.h" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ubuntu/device.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/plugins/cordova-plugin-device/www/device.js" afterPath="$PROJECT_DIR$/assets/www/plugins/cordova-plugin-device/www/device.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ubuntu/device.js" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/ubuntu/device.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/www/device.js" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/www/device.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/fetch.json" afterPath="$PROJECT_DIR$/../../plugins/fetch.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/blackberry10/index.js" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/src/blackberry10/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/de/index.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/de/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/es/index.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/es/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/fr/index.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/fr/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/it/index.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/it/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ja/index.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ja/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ko/index.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ko/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/pl/index.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/pl/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ru/index.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/ru/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/zh/index.md" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/doc/zh/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/login_controller.js" afterPath="$PROJECT_DIR$/assets/www/js/login_controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/js/login_controller.js" afterPath="$PROJECT_DIR$/../../www/js/login_controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/module.js" afterPath="$PROJECT_DIR$/assets/www/js/module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/js/module.js" afterPath="$PROJECT_DIR$/../../www/js/module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../package.json" afterPath="$PROJECT_DIR$/../../package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/package.json" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/package.json" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/plugin.xml" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/tests/plugin.xml" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/tests/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/plugin.xml" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v13_23_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v13_23_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/tests/tests.js" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/tests/tests.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/plugins/cordova-plugin-whitelist/whitelist.js" afterPath="$PROJECT_DIR$/assets/www/plugins/cordova-plugin-whitelist/whitelist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/whitelist.js" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/whitelist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="android.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,21 +225,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login_controller.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="login_controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/www/js/login_controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+              <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37362638">
-              <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2985,8 +3165,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/com.phonegap.plugins.facebookconnect/android-FacebookLib/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/assets/www/js/login_controller.js" />
         <option value="$PROJECT_DIR$/assets/www/js/app.js" />
+        <option value="$PROJECT_DIR$/assets/www/js/login_controller.js" />
       </list>
     </option>
   </component>
@@ -3024,26 +3204,6 @@
     <panes>
       <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FacebookLib" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -3159,16 +3319,37 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FacebookLib" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="android.project.structure.last.selected" value="FacebookLib" />
     <property name="android.project.structure.proportion" value="0.34125" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="4d00a094d43aa1c5" />
     <property name="FullScreen" value="false" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
   </component>
   <component name="RunManager" selected="Android Application.android">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -3376,32 +3557,32 @@
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46864685" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46864685" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24968234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -3439,6 +3620,38 @@
     <entry file="file://$PROJECT_DIR$/assets/www/js/login_controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com.phonegap.plugins.facebookconnect/android-FacebookLib/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com.phonegap.plugins.facebookconnect/android-FacebookLib/src/com/facebook/AppEventsLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="56" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/www/js/login_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
           <folding />
         </state>
@@ -3446,8 +3659,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37362638">
-          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com.phonegap.plugins.facebookconnect/android-FacebookLib/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com.phonegap.plugins.facebookconnect/android-FacebookLib/src/com/facebook/AppEventsLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="56" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/www/js/login_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
           <folding />
         </state>
       </provider>

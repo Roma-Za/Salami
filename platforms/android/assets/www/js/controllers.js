@@ -1,4 +1,4 @@
-starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage, $state, $ionicLoading) {
+starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, $http, localStorage, $state, $ionicLoading, $ionicPush) {
   localStorage.setObject("selectedAlbum", '{}');
 
   $scope.fbUser = localStorage.getObject('fb_user');

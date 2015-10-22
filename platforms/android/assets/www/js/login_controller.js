@@ -1,5 +1,5 @@
 starter.controller('LoginCtrl',
-function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
+function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionicPush) {
   $scope.albums =  localStorage.getObject("albums");
   $scope.fb_user = localStorage.getObject("fb_user");
   $scope.checkLoginState = function(){
@@ -58,17 +58,26 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory) {
               $scope.fb_user.birthday = Utils.getUserDate(success, 'birthday');
               $scope.fb_user.gender = Utils.getUserDate(success, 'gender');
               $scope.fb_user.id = success.id;
-              Ionic.io();
-              var ionicUser = Ionic.User.current();
-              ionicUser.id = success.id;
-              if (!ionicUser.id) {
-                ionicUser.id = Ionic.User.anonymousId();
-                // user.id = 'your-custom-user-id';
-              }
-              ionicUser.save();
               localStorage.setObject("fb_user", $scope.fb_user);
               $scope.isExist();
-              
+              Ionic.io();
+              var ionicUser = Ionic.User.current();
+              var push = new Ionic.Push({
+                "debug": false,
+                "onNotification": function(notification) {
+                  var payload = notification.payload;
+                  alert(JSON.stringify(notification));
+                }
+              });
+          
+              push.register(function(token) {
+                console.log("Device token: " + token.token);
+                ionicUser.id = success.id;
+                ionicUser.set('name', success.name);
+                ionicUser.set('image', success.picture.data.url);
+                ionicUser.addPushToken(token.token);
+                ionicUser.save();
+              });
             }
           },
           function (error) {

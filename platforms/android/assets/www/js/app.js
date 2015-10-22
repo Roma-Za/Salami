@@ -19,13 +19,6 @@ starter.run(function($ionicPlatform) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    var push = new Ionic.Push({
-      "debug": false
-    });
-
-    push.register(function(token) {
-      console.log("Device token: " + token.token);
-    });
   });
 })
 

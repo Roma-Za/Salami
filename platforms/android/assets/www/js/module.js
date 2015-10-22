@@ -1,1 +1,1 @@
-var starter = angular.module('starter', ['ionic']);
+var starter = angular.module('starter', ['ionic','ionic.service.core', 'ionic.service.push']);

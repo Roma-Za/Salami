@@ -9,10 +9,6 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"android-package\" value=\"org.apache.cordova.facebook.ConnectPlugin\" /></feature>",
                             "count": 1
                         },
@@ -53,19 +49,23 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"PushNotification\"><param name=\"android-package\" value=\"com.adobe.phonegap.push.PushPlugin\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"PushNotification\"><param name=\"android-package\" value=\"com.adobe.phonegap.push.PushPlugin\" /></feature>",
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"io.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -160,21 +160,12 @@
         }
     },
     "installed_plugins": {
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.salami.android"
-        },
         "com.phonegap.plugins.facebookconnect": {
             "APP_ID": "1035011036532302",
             "APP_NAME": "Salami",
             "PACKAGE_NAME": "com.salami.android"
         },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.salami.android"
-        },
         "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "com.salami.android"
-        },
-        "cordova-plugin-device": {
             "PACKAGE_NAME": "com.salami.android"
         },
         "cordova-plugin-geolocation": {
@@ -183,10 +174,16 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.salami.android"
         },
-        "cordova-plugin-whitelist": {
+        "phonegap-plugin-push": {
             "PACKAGE_NAME": "com.salami.android"
         },
-        "phonegap-plugin-push": {
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.salami.android"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.salami.android"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.salami.android"
         }
     },
