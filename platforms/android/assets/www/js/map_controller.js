@@ -62,7 +62,7 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
         function(err){
           console.log("PUTerr---" + JSON.stringify(err));
         })
-      $state.go('app.playlists');
+      $state.go('app.userlist');
     };
 
 });

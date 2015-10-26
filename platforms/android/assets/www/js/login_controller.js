@@ -102,7 +102,7 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionic
         console.log('IIIIIIIIIIIIIIIIIIIIIIIIDDDDDDDDDDDDDDDDDDD', data.data[0].id);
         localStorage.set('myId', data.data[0].id);
         localStorage.setObject("salami_user", data.data[0]);
-        $state.go('app.playlists');
+        $state.go('app.userlist');
       }else{
         $state.go('loginProfile');
       }

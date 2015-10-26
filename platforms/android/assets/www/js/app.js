@@ -124,25 +124,16 @@ starter.run(function($ionicPlatform) {
       }
     })
 
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.userlist', {
+      url: '/userlist',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/userlist.html',
+          controller: 'UserlistCtrl'
         }
       }
-    })
+    });
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
-      }
-    }
-  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/start');
 });

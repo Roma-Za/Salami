@@ -2,24 +2,38 @@ starter.controller('ChatListCtrl', function($scope, $state, localStorage, $http,
 
  
   $scope.checkingMail = function(){
-    $scope.newMess = [];
+    $scope.arrChats = [];
     $scope.users = [];
+    $scope.arrIsNew = [];
 
-    $http.get(API_URL + "messages/search?&recipient_id=" + $scope.myId + "&state=new").then(function(data) {
+    $http.get(API_URL + "messages/search?recipient_id=" + $scope.myId).then(function(data) {
       console.log("checkingMail__data__", JSON.stringify(data));
 
       for (var i = 0; i < data.data.length; i++) {
-        if($scope.newMess.indexOf(data.data[i].sender_id)===-1){
-          $scope.newMess.push(data.data[i].sender_id);
+        if($scope.arrChats.indexOf(data.data[i].sender_id)===-1){
+          $scope.arrChats.push(data.data[i].sender_id);
+        }
+
+        if(data.data[i].type === "new"){
+          $scope.arrIsNew.push(data.data[i].sender_id);
         }
       }
 
-      console.log("newMess", JSON.stringify($scope.newMess));
+      console.log("arrChats ", JSON.stringify($scope.arrChats));
+      console.log("arrIsNew ", JSON.stringify($scope.arrIsNew));
 
-      for (var i = 0; i < $scope.newMess.length; i++) {
-         $http.get(API_URL + "salamiusers/" + $scope.newMess[i]).then(function(data) {
-            console.log('user   ', JSON.stringify(data));            
-              $scope.users.push(data.data);
+      for (var i = 0; i < $scope.arrChats.length; i++) {
+         $http.get(API_URL + "salamiusers/" + $scope.arrChats[i]).then(function(data) {
+            console.log('user   ', JSON.stringify(data)); 
+            var tempObj = data.data;  
+
+            if($scope.arrIsNew.indexOf($scope.arrChats[i])===-1){
+              tempObj.isNew = "New message!";
+            }else{
+              tempObj.isNew = " ";
+            }
+                     
+            $scope.users.push(tempObj);
           }, function(err) {
             console.error('ERR', err);
           });

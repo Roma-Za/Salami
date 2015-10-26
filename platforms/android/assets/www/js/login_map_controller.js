@@ -133,7 +133,7 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
       });
     i++;
     };
-    $state.go('app.playlists');
+    $state.go('app.userlist');
   };
 
 });

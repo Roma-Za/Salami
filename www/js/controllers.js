@@ -176,86 +176,65 @@ starter.controller('AlbumsCtrl', function($scope, $http, localStorage) {
 
 })
 
-starter.controller('PlaylistsCtrl', function($scope, $http, $ionicHistory, $state, localStorage, $ionicLoading, $timeout, $interval) {
+starter.controller('UserlistCtrl', function($scope, $http, $ionicHistory, $state, localStorage, $ionicLoading, $timeout, $interval) {
 
   //$ionicHistory.clearHistory();
-  localStorage.set('isChanged', true);
-/*
-  $http.get(API_URL + "salamiusers/search").then(function(data) {
-
-    console.log('Success        list       ', JSON.stringify(data.data));
-    $scope.userlists = data.data;
-
-  }, function(err) {
-    console.error('ERR     list      ', err);
-  });
-*/
-
-  $scope.duildUrl = function(settings){
-    var strQuery = 'salamiusers/search';
-    if($scope.settings.distance!==-1){ 
-      var dis = "distance=" + $scope.settings.distance;
+ 
+  $scope.buildUrl = function(settings){
+    var strQuery = 'salamiusers/findusers?id=' + localStorage.get('myId');
+    if(settings.distance!==-1){ 
+      var dis = "distance=" + settings.distance;
     }
 
-    if($scope.settings.collection_type!=="_"){
-      var type = "collection_type=" + $scope.settings.collection_type;
+    if(settings.collection_type!=="_"){
+      var type = "collection_type=" + settings.collection_type;
     }
 
     if(dis){
-      strQuery = strQuery + "?" + dis;
+      strQuery = strQuery + "&" + dis;
       if(type){
         strQuery = strQuery + "&" + type;
       } 
     }else{
       if(type){
-        strQuery = strQuery + "?" + type;
+        strQuery = strQuery + "&" + type;
       } 
     }
     return strQuery;
   }
 
-  $scope.updateUserlists = function(){
 
-    var isChanged = localStorage.get('isChanged');
-    console.log("isChanged", isChanged);
-    if(isChanged){
-      $http.get(API_URL + "settings/" + localStorage.get('myId')).then(function(data) {
+  $scope.$on('$ionicView.enter', function(){
+    $http.get(API_URL + "settings/" + localStorage.get('myId')).then(function(data) {
 
-        console.log("__data__settings", JSON.stringify(data));
-        $scope.settings = data.data;
-        var str =  $scope.duildUrl($scope.settings);
+      console.log("__data__settings", JSON.stringify(data));
+      $scope.settings = data.data;
+      var str =  $scope.buildUrl($scope.settings);
+      console.log("STR__settings ", str);
+      $http.get(API_URL + str).then(function(data) {
 
-        $http.get(API_URL + str).then(function(data) {
-
-          console.log('Success        list       ', JSON.stringify(data.data));
-          $scope.userlists = data.data;
-
-        }, function(err) {
-          console.error('ERR     list      ', err);
-        });
+        console.log('Success        list       ', JSON.stringify(data.data));
+        $scope.userlists = data.data;
 
       }, function(err) {
-
-        console.log("__err__", JSON.stringify(err));
-        $http.get(API_URL + "salamiusers/search").then(function(data) {
-
-          console.log('Success        list       ', JSON.stringify(data.data));
-          $scope.userlists = data.data;
-
-        }, function(err) {
-          console.error('ERR     list      ', err);
-        });
-
+        console.error('ERR     list      ', err);
       });
 
-      localStorage.set('isChanged', false);
-    }
-  }
+    }, function(err) {
 
+      console.log("__err__", JSON.stringify(err));
+      $http.get(API_URL + "salamiusers/findusers?id=" + localStorage.get('myId')).then(function(data) {
 
-  $timeout($scope.updateUserlists, 10);
-  $interval($scope.updateUserlists, 5000);
+        console.log('Success        list       ', JSON.stringify(data.data));
+        $scope.userlists = data.data;
 
+      }, function(err) {
+        console.error('ERR     list      ', err);
+      });
+
+    });
+  });
+  
   $scope.showPhotos = function(selectedCard){
     var albumId = JSON.parse(selectedCard).albums[0].album_id;
     console.log('album_id___ '+ albumId);
@@ -399,9 +378,7 @@ starter.controller('SearchCtrl', function($scope, $state, $http, localStorage) {
       });
     });
     localStorage.set('isChanged', true);
-    $state.go('app.playlists');
+    $state.go('app.userlist');
   }
 
-})
-starter.controller('PlaylistCtrl', function($scope, $stateParams) {
 });

@@ -4,7 +4,7 @@
           <a class="item item-avatar" ng-repeat="item in users" ng-click = "selectChat('{{ item }}')">
             <img src="{{item.profile_picture}}">
             <h2>{{item.name}}</h2>
-            <p>New message.</p>
+            <p>{{item.isNew}}</p>
           </a>
       </div>
     </ion-content>
