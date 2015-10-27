@@ -1,5 +1,5 @@
 starter.controller('LoginCtrl',
-function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionicPush) {
+function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionicPush, $ionicLoading, $timeout, $rootScope) {
   $scope.albums =  localStorage.getObject("albums");
   $scope.fb_user = localStorage.getObject("fb_user");
   $scope.checkLoginState = function(){
@@ -37,7 +37,6 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionic
   $scope.fbLogin = function() {
     console.log("fbLogin: " + facebookConnectPlugin);
     if (!facebookConnectPlugin || !Utils.checkConnection()) return;
-
     facebookConnectPlugin.login(['public_profile','email', 'user_birthday', 'user_photos'], function(data){
       $scope.statusChangeCallback(data);
     }, function(error){
@@ -45,7 +44,8 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionic
     })
   };
   
-  $scope.fetchFbInfo = function(){
+  $scope.fetchFbInfo = function(){    
+    $ionicLoading.show({ template: 'Please wait...' });
     facebookConnectPlugin.api('me/?fields=picture.height(250).width(250),email,birthday,name,gender',
           ["public_profile", "user_birthday", "email"], 
           function (success) {
@@ -60,13 +60,13 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionic
               $scope.fb_user.id = success.id;
               localStorage.setObject("fb_user", $scope.fb_user);
               $scope.isExist();
-              Ionic.io();
+             Ionic.io();
               var ionicUser = Ionic.User.current();
               var push = new Ionic.Push({
                 "debug": false,
                 "onNotification": function(notification) {
                   var payload = notification.payload;
-                  alert(JSON.stringify(notification));
+                  $rootScope.$broadcast('event:push', notification);
                 }
               });
           
@@ -102,12 +102,15 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionic
         console.log('IIIIIIIIIIIIIIIIIIIIIIIIDDDDDDDDDDDDDDDDDDD', data.data[0].id);
         localStorage.set('myId', data.data[0].id);
         localStorage.setObject("salami_user", data.data[0]);
+        $ionicLoading.hide();
         $state.go('app.userlist');
       }else{
+        $ionicLoading.hide();
         $state.go('loginProfile');
       }
     }, function(err) {
       console.error('ERR', err);
+      $ionicLoading.hide();
       $state.go('loginProfile');
     });
   };
@@ -153,6 +156,18 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionic
     facebookConnectPlugin.logout(function(response) {
       $ionicHistory.clearCache();
       $ionicHistory.clearHistory();
+
+      var push = new Ionic.Push();
+      var user = Ionic.User.current();
+
+      var callback = function(pushToken) {
+        console.log('Registered token:', pushToken.token);
+        user.removeToken(pushToken);
+        user.save(); // you NEED to call a save after you add the token
+      }
+
+      push.register(callback);
+
       $ionicPopup.alert({
         title: 'message',
         template: "Log out done."

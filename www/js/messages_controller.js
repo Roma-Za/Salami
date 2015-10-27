@@ -1,16 +1,11 @@
-starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, $state, localStorage, $http, $interval) {
+starter.controller('Messages', function($scope, $ionicScrollDelegate, $state, localStorage, $http, $ionicPopup, $timeout, $rootScope) {
 
   $scope.hideTime = false;
   $scope.salami_user = localStorage.getObject('salami_user');
-  $scope.recipient = JSON.parse(localStorage.getObject("recipient"));
+ 
 
-  $scope.callAtInterval = function(){
-    console.log("Interval occurred");
-    $scope.recipient = JSON.parse(localStorage.getObject("recipient"));
-    if(!$scope.users[$scope.recipient.id]){
-      $scope.users[$scope.recipient.id] = [];
-    }
-    $scope.messages = $scope.users[$scope.recipient.id];
+  $scope.receiveNewMessage = function(){
+    console.log("receiveNewMessage");
     $http.get(API_URL + "messages/search?sender_id=" + $scope.recipient.id + "&recipient_id=" + $scope.myId + "&state=new").then(function(data) {
       console.log("__data__", JSON.stringify(data));
 
@@ -23,6 +18,7 @@ starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, 
           text: data.data[i].text,
           time: time
         });
+        $ionicScrollDelegate.scrollBottom(true);
 
         $http({method:'PUT', url: API_URL + "messages/" + data.data[i].id, data: {state: 'read'}})
         .then(function(resp){
@@ -35,7 +31,6 @@ starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, 
     }, function(err) {
       console.log("__err__", JSON.stringify(err));
     });
-    $scope.users[$scope.recipient.id] = $scope.messages;
   }
 
   $scope.sendMessage = function() {
@@ -50,15 +45,11 @@ starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, 
     });
 
     var mes = {};
-    mes.text = $scope.data.message;
-    var y = new Date();
-    mes.created_at = y;
+    mes.message = $scope.data.message;
     mes.sender_id = $scope.myId;
     mes.recipient_id = $scope.recipient.id;
-    mes.state = 'new';
-    console.log('mes_____'+ JSON.stringify(mes));
-
-    $http.post(API_URL + "messages", mes).then(function(response) {
+    
+    $http.post(API_URL + "messages/send", mes).then(function(response) {
       console.log("response-mes--" + JSON.stringify(response));
       }, function(response) {
         console.log("err-" + JSON.stringify(response));
@@ -83,13 +74,55 @@ starter.controller('Messages', function($scope, $timeout, $ionicScrollDelegate, 
   $scope.closeKeyboard = function() {
     cordova.plugins.Keyboard.close();
   };
-  $timeout($scope.callAtInterval, 0);
-  $interval($scope.callAtInterval, 5000);
-  $scope.users = [];
-  $scope.users[$scope.recipient.id] = [];
-  $scope.data = {};
-  $scope.myId = $scope.salami_user.id;
-  $scope.messages = [];
-  $scope.messages = $scope.users[$scope.recipient.id];
-  
+
+  $scope.loadHistory = function(){
+    $http.get(API_URL + "messages/history?user_id=" + $scope.recipient.id + "&buddy_id=" + $scope.myId).then(function(data) {
+     
+      for (var i = 0; i < data.data.length; i++) {
+        var dateAt = new Date(data.data[i].created_at);
+        time = dateAt.toLocaleString('en-US', DATE_TIME_OPTS);
+
+        $scope.messages.push({
+          userId: data.data[i].sender_id,
+          text: data.data[i].text,
+          time: time
+        });
+        if(data.data[i].state == 'new' ){
+          $http({method:'PUT', url: API_URL + "messages/" + data.data[i].id, data: {state: 'read'}}).then(function(resp){
+            console.log("PUTresponse---" + JSON.stringify(resp));
+          }), 
+          function(err){
+            console.log("PUTerr---" + JSON.stringify(err));
+          }
+        }
+      }
+      $ionicScrollDelegate.scrollBottom(true);
+    }, function(err) {
+      console.log("__err__", JSON.stringify(err));
+    });
+  }
+
+  $scope.$on('$ionicView.enter', function(){
+
+    $scope.recipient = JSON.parse(localStorage.getObject("recipient"));
+    $scope.data = {};
+    $scope.myId = $scope.salami_user.id;
+    $scope.messages = [];
+
+    $scope.$on('event:push', function(e, data) {
+      if(data.payload.sender === $scope.recipient.facebook_id){
+        console.log("push data", JSON.stringify(data));
+        $scope.receiveNewMessage();
+      }
+    });
+
+    $scope.loadHistory();
+
+  });
 });
+/*
+push data {"_raw":{"message":"телефон слабый","additionalData":{"payload":{"sender":"118001368559415"},
+"foreground":true,"from":"58348125466","collapse_key":"do_not_collapse"},"title":"Salami"},
+"_payload":{"sender":"118001368559415"},"app":{"asleep":false,"closed":false},
+"text":"телефон слабый","title":"Salami","count":null,"sound":null,"image":null}
+*/
