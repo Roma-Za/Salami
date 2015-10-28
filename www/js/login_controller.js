@@ -60,29 +60,34 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionic
               $scope.fb_user.id = success.id;
               localStorage.setObject("fb_user", $scope.fb_user);
               $scope.isExist();
-             Ionic.io();
-              var ionicUser = Ionic.User.current();
-              var push = new Ionic.Push({
-                "debug": false,
-                "onNotification": function(notification) {
-                  var payload = notification.payload;
-                  $rootScope.$broadcast('event:push', notification);
-                }
-              });
-          
-              push.register(function(token) {
-                console.log("Device token: " + token.token);
-                ionicUser.id = success.id;
-                ionicUser.set('name', success.name);
-                ionicUser.set('image', success.picture.data.url);
-                ionicUser.addPushToken(token.token);
-                ionicUser.save();
-              });
+              $scope.registerForPush(success);
             }
           },
           function (error) {
             console.log("FB get /me error: " + JSON.stringify(error));
           });
+  };
+  
+  $scope.registerForPush  = function(user){
+    Ionic.io();
+    var ionicUser = Ionic.User.current();
+    $ionicPush.init({
+      "debug": false,
+      "onNotification": function(notification) {
+        var payload = notification.payload;
+        $rootScope.$broadcast('event:push', notification);
+      },
+      "onRegister": function(token) {
+          console.log("Device token: " + token.token);
+          ionicUser.id = user.id;
+          ionicUser.set('name', user.name);
+          ionicUser.set('image', user.picture.data.url);
+          ionicUser.addPushToken(token.token);
+          ionicUser.save();
+        }
+    });
+    
+    $ionicPush.register();
   };
 
   $scope.getFbAlbums = function(){
@@ -153,20 +158,10 @@ function($scope, $http, $state, $ionicPopup, localStorage, $ionicHistory, $ionic
   };
 
   $scope.logout = function(){
+    $ionicPush.unregister();
     facebookConnectPlugin.logout(function(response) {
       $ionicHistory.clearCache();
       $ionicHistory.clearHistory();
-
-      var push = new Ionic.Push();
-      var user = Ionic.User.current();
-
-      var callback = function(pushToken) {
-        console.log('Registered token:', pushToken.token);
-        user.removeToken(pushToken);
-        user.save(); // you NEED to call a save after you add the token
-      }
-
-      push.register(callback);
 
       $ionicPopup.alert({
         title: 'message',

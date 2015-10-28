@@ -320,34 +320,28 @@ starter.controller('SearchCtrl', function($scope, $state, $http, localStorage) {
   $scope.itemsList = ITEMSLIST;
   $scope.settings = {};
   $scope.settings.salami_user_id = localStorage.get('myId');
-  $scope.distance = -1;
+  $scope.form = {
+    distance: -1,
+    placeholder_dis: "distance (km)",
+    placeholder_type: "type of collection"
+  };
   localStorage.setObject('collection_type', "_");
-  $scope.placeholder_dis = "distance (km)";
-  $scope.placeholder_type = "type of collection";
 
   $scope.$on('$ionicView.enter', function(){
     $http.get(API_URL + "settings/search?salami_user_id=" + $scope.settings.salami_user_id).then(function(data) {
         console.log("__data__", JSON.stringify(data));
-        $scope.placeholder_dis = data.data.distance + " (km)";
-        $scope.placeholder_type = data.data.collection_type;
-        $scope.cType = data.data.collection_type;
+        $scope.form.placeholder_dis = data.data.distance + " (km)";
+        $scope.form.placeholder_type = data.data.collection_type;
+        $scope.form.cType = data.data.collection_type;
     }, function(err) {
       console.log("__err__", JSON.stringify(err));
       $scope.cType = "_";
     });
   });
 
-
-  $scope.closeKeyboard = function() {
-    cordova.plugins.Keyboard.close();
-    $scope.settings.distance = $scope.distance;
-    localStorage.setObject('distance', $scope.distance);
-    console.log(JSON.stringify($scope.distance));
-  };
-
   $scope.goToUserList = function(){
-    if($scope.distance!==-1){
-      $scope.settings.distance = $scope.distance;
+    if($scope.form.distance!==-1){
+      $scope.settings.distance = $scope.form.distance;
     }
 
     if(localStorage.getObject('collection_type') == ""){
