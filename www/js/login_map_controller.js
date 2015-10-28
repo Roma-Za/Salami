@@ -35,7 +35,7 @@ function($scope, $ionicPopup, localStorage, $http, $state) {
         title: 'Unable to get location',
         template: 'Please make sure Location Service is switched on'
       });
-    }, { enableHighAccuracy: true, timeout:10000, maximumAge: 3600000 });
+    }, { enableHighAccuracy: true, timeout:20000, maximumAge: 3600000 });
   };
 
   $scope.mapCreated = function(map) {

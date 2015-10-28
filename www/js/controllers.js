@@ -332,7 +332,7 @@ starter.controller('SearchCtrl', function($scope, $state, $http, localStorage) {
         console.log("__data__", JSON.stringify(data));
         $scope.form.placeholder_dis = data.data.distance + " (km)";
         $scope.form.placeholder_type = data.data.collection_type;
-        $scope.form.cType = data.data.collection_type;
+        $scope.cType = data.data.collection_type;
     }, function(err) {
       console.log("__err__", JSON.stringify(err));
       $scope.cType = "_";
@@ -340,11 +340,16 @@ starter.controller('SearchCtrl', function($scope, $state, $http, localStorage) {
   });
 
   $scope.goToUserList = function(){
-    if($scope.form.distance!==-1){
+      var isInt = function(n) {
+       return parseInt(n) === n 
+      };
+    if($scope.form.distance!==-1 && $scope.form.distance!=="" && isInt($scope.form.distance)){
       $scope.settings.distance = $scope.form.distance;
+    }else{
+      $scope.settings.distance = -1;;
     }
 
-    if(localStorage.getObject('collection_type') == ""){
+    if(localStorage.getObject('collection_type') == "" || localStorage.getObject('collection_type') == {}){
       localStorage.setObject('collection_type', "_");
     }
     if(!(localStorage.getObject('collection_type') == "_" && $scope.cType == "_")){
@@ -373,6 +378,10 @@ starter.controller('SearchCtrl', function($scope, $state, $http, localStorage) {
     });
     localStorage.set('isChanged', true);
     $state.go('app.userlist');
+  }
+
+  $scope.closeKeyboard = function() {
+    cordova.plugins.Keyboard.close();
   }
 
 });

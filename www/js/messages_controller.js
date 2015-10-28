@@ -18,14 +18,16 @@ starter.controller('Messages', function($scope, $ionicScrollDelegate, $state, lo
           text: data.data[i].text,
           time: time
         });
-        $ionicScrollDelegate.scrollBottom(true);
 
-        $http({method:'PUT', url: API_URL + "messages/" + data.data[i].id, data: {state: 'read'}})
-        .then(function(resp){
-          console.log("PUTresponse---" + JSON.stringify(resp));
-        }), 
-        function(err){
-          console.log("PUTerr---" + JSON.stringify(err));
+        $ionicScrollDelegate.scrollBottom(true);
+        if(data.data[i].state == 'new' && data.data[i].recipient_id == $scope.myId){
+          $http({method:'PUT', url: API_URL + "messages/" + data.data[i].id, data: {state: 'read'}})
+          .then(function(resp){
+            console.log("PUTresponse---" + JSON.stringify(resp));
+          }), 
+          function(err){
+            console.log("PUTerr---" + JSON.stringify(err));
+          }
         }
       }
     }, function(err) {
@@ -87,7 +89,7 @@ starter.controller('Messages', function($scope, $ionicScrollDelegate, $state, lo
           text: data.data[i].text,
           time: time
         });
-        if(data.data[i].state == 'new' ){
+        if(data.data[i].state == 'new' && data.data[i].recipient_id == $scope.myId){
           $http({method:'PUT', url: API_URL + "messages/" + data.data[i].id, data: {state: 'read'}}).then(function(resp){
             console.log("PUTresponse---" + JSON.stringify(resp));
           }), 
@@ -120,9 +122,3 @@ starter.controller('Messages', function($scope, $ionicScrollDelegate, $state, lo
 
   });
 });
-/*
-push data {"_raw":{"message":"телефон слабый","additionalData":{"payload":{"sender":"118001368559415"},
-"foreground":true,"from":"58348125466","collapse_key":"do_not_collapse"},"title":"Salami"},
-"_payload":{"sender":"118001368559415"},"app":{"asleep":false,"closed":false},
-"text":"телефон слабый","title":"Salami","count":null,"sound":null,"image":null}
-*/
