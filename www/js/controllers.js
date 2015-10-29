@@ -8,6 +8,29 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
 
   $scope.itemsList = ITEMSLIST;
 
+  $scope.searchNewMess = function(){
+    $scope.newMessages = [];
+    $http.get(API_URL + "messages/search?recipient_id=" + localStorage.get('myId') + "&state=new").then(function(data) {
+       for (var i = 0; i < data.data.length; i++) {
+         if($scope.newMessages.indexOf(data.data[i].sender_id)===-1){
+            $scope.newMessages.push(data.data[i].sender_id);
+         }
+       }
+    }, function(err) {
+      console.error('ERR', err);
+    });
+  }
+
+  $scope.$on('$ionicView.enter', function(){
+    $scope.searchNewMess();
+  });
+
+  $scope.$on('event:push', function(e, data) {
+    if(data.payload.sender !== $scope.salami_user.facebook_id){
+      $scope.searchNewMess();
+    }
+  });
+
   //Объявление функций
   $scope.reSaveSalamiUser = function(){
      $http.get(API_URL + "salamiusers/search?facebook_id=" + $scope.fbUser.id).then(function(data) {
@@ -24,7 +47,7 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopu
     $scope.album = {};
     if(localStorage.getObject("selectedAlbum")!=='{}'){
       $scope.album = JSON.parse(localStorage.getObject("selectedAlbum"));
-      console.log("album 1111111 "+ JSON.stringify($scope.album));
+      console.log("album 1111111 " + JSON.stringify($scope.album));
 
       if($scope.salami_user.albums[0].facebook_album_id !== $scope.album.id){
         $scope.salamiAlbumMod();
@@ -176,7 +199,7 @@ starter.controller('AlbumsCtrl', function($scope, $http, localStorage) {
 
 })
 
-starter.controller('UserlistCtrl', function($scope, $http, $ionicHistory, $state, localStorage, $ionicLoading, $timeout, $interval) {
+starter.controller('UserlistCtrl', function($scope, $http, $ionicHistory, $state, localStorage, $ionicLoading, $timeout, $interval, $ionicPopup) {
 
   //$ionicHistory.clearHistory();
  
@@ -239,7 +262,7 @@ starter.controller('UserlistCtrl', function($scope, $http, $ionicHistory, $state
     var albumId = JSON.parse(selectedCard).albums[0].album_id;
     console.log('album_id___ '+ albumId);
     localStorage.set('albId', albumId);
-    $state.go('photos');
+    $state.go('app.photos');
   }
 
   $scope.doDislike = function(item){
@@ -292,10 +315,29 @@ starter.controller('UserlistCtrl', function($scope, $http, $ionicHistory, $state
   }
 
   $scope.sendMess = function(item){
-    localStorage.setObject("recipient", item);
-    $state.go('chat');
-  }
+    $http.get(API_URL + "likes/search?user1_id=" + localStorage.get('myId') + "&user2_id="+ JSON.parse(item).id + "&type=like").then(function(data) {
+      console.log('sendMess1 data   ', JSON.stringify(data));
+      $http.get(API_URL + "likes/search?user1_id=" + JSON.parse(item).id + "&user2_id="+ localStorage.get('myId') + "&type=like").then(function(data) {
+        console.log('sendMess2 data   ', JSON.stringify(data));
+              
+        localStorage.setObject("recipient", item);
+        $state.go('chat');
 
+      }, function(err) {
+        console.error('ERR1', err);
+        $ionicPopup.alert({
+          title: 'info',
+          template: "You can not write messages until reciprocity Like."
+        }); 
+      });
+    }, function(err) {
+      console.error('ERR1', err);
+      $ionicPopup.alert({
+        title: 'info',
+        template: "You can not write messages until reciprocity Like."
+      });
+    });
+  }
 })
 
 starter.controller('PhotosCtrl', function($scope, $state, $http, localStorage, $ionicLoading, $timeout) {

@@ -55,12 +55,6 @@ starter.run(function($ionicPlatform) {
     controller: 'MapCtrl'
   })
 
-  .state('photos', {
-    url: "/photos",
-    templateUrl: "templates/photos.html",
-    controller: 'PhotosCtrl'
-  })
-
   .state('loginMap', {
     url: "/loginMap",
     templateUrl: "templates/loginMap.html",
@@ -122,6 +116,17 @@ starter.run(function($ionicPlatform) {
            controller: 'MapCtrl'
         }
       }
+    })
+
+    .state('app.photos', {
+      url: "/photos",
+      views:{
+        'menuContent': {
+          templateUrl: "templates/photos.html",
+          controller: 'PhotosCtrl'
+        }
+      }
+      
     })
 
     .state('app.userlist', {
